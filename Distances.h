@@ -21,6 +21,8 @@ public:
     long double canberraDistance();
 
     long double minkowskiDistance();
+
+    long double minkowskiDistanceGeneric(int exp);
 };
 
 #endif //AP1_DISTANCES_H

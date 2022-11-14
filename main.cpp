@@ -29,8 +29,12 @@ int main() {
     vector<long double> v1 = parseString(input1);
     getline(cin,input2, '\n');
     vector<long double> v2 = parseString(input2);
+    if(v1.empty()){
+        cout<<"empty vector, bye!"<<endl;
+        return 0;
+    }
     if(v1.size() != v2.size()){
-        cout<<"illegal input"<<endl;
+        cout<<"illegal input, bye!"<<endl;
         return 0;
     }
     Distances d= Distances(v1, v2);
