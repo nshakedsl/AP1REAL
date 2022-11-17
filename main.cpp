@@ -5,6 +5,8 @@ using namespace std;
 
 bool validDouble(string s){
     bool hadDot = false;
+    if(s.empty())
+        return false;
     for (int i = 0; i < s.size(); ++i) {
         if(s[i]=='.' && !hadDot) {
             hadDot = true;
@@ -29,20 +31,27 @@ void printLongDouble(double value, bool val = true){
 vector<double> parseString(const string& s){
     int counter = 0;
     int prev = 0;
+    string temp;
     vector<double> v;
     while (counter < s.size()){
         // if it has reached a space character then cuts the string until the space
         if(s[counter] == ' '){
-            if(!validDouble(s.substr(prev,counter))){
+            temp = s.substr(prev,counter - prev);
+            if(!validDouble(temp)){
                 cout << "illegal input";
                 exit(1);
             }
-            v.push_back(stof(s.substr(prev,counter)));
+            v.push_back(stof(temp));
             prev = counter + 1;
         }
         counter++;
     }
-    v.push_back(stof(s.substr(prev,counter)));
+    temp = s.substr(prev,counter - prev);
+    if(!validDouble(temp)){
+        cout << "illegal input";
+        exit(1);
+    }
+    v.push_back(stof(temp));
     return v;
 }
 
