@@ -1,11 +1,9 @@
 #include <iostream>
 #include <vector>
 #include "Distances.h"
-#define type long double
 using namespace std;
 //parses a string into a vector of ints, needs to get a string composed of numbers seperated by spaces
-//todo: make sure works with empty string
-void printLongDouble(type value, bool val = true){
+void printLongDouble(double value, bool val = true){
     if(value-(int)value == 0)
         cout.precision(1);
     else
@@ -15,10 +13,10 @@ void printLongDouble(type value, bool val = true){
         cout << endl;
 }
 
-vector<long double> parseString(const string& s){
+vector<double> parseString(const string& s){
     int counter = 0;
     int prev = 0;
-    vector<long double> v;
+    vector<double> v;
     while (counter < s.size()){
         // if it has reached a space character then cuts the string until the space
         if(s[counter] == ' '){
@@ -36,9 +34,9 @@ int main() {
     string input1, input2;
     // receives 2 vectors from the user
     getline(cin,input1, '\n');
-    vector<type> v1 = parseString(input1);
+    vector<double> v1 = parseString(input1);
     getline(cin,input2, '\n');
-    vector<type> v2 = parseString(input2);
+    vector<double> v2 = parseString(input2);
     if(v1.empty()){
         cout<<"empty vector, bye!"<<endl;
         return 0;
