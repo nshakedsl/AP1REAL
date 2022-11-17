@@ -24,6 +24,8 @@ double Distances::manhattenDistance()
 //calculate chebyshev distance
 double Distances::chebyshevDistance()
 {
+    if(v1.empty())
+        return 0;
     double distance = 0;
     for (int i = 0; i < v1.size(); ++i)
     {
@@ -35,6 +37,8 @@ double Distances::chebyshevDistance()
 // calculate canberra distance
 double Distances::canberraDistance()
 {
+    if(v1.empty())
+        return 0;
     double distance = 0;
     for (int i = 0; i < v1.size(); ++i)
     {
@@ -49,6 +53,8 @@ double Distances::minkowskiDistance()
 }
 double Distances::minkowskiDistanceGeneric(int exp)
 {
+    if(v1.empty())
+        return 0;
     double distance = 0;
     for (int i = 0; i < v1.size(); ++i)
     {

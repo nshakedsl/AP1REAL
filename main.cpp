@@ -2,6 +2,19 @@
 #include <vector>
 #include "Distances.h"
 using namespace std;
+
+bool validDouble(string s){
+    bool hadDot = false;
+    for (int i = 0; i < s.size(); ++i) {
+        if(s[i]=='.' && !hadDot) {
+            hadDot = true;
+            continue;
+        }
+        if(s[i]<'0'||s[i]>'9')
+            return false;
+    }
+    return true;
+}
 //parses a string into a vector of ints, needs to get a string composed of numbers seperated by spaces
 void printLongDouble(double value, bool val = true){
     if(value-(int)value == 0)
@@ -20,6 +33,10 @@ vector<double> parseString(const string& s){
     while (counter < s.size()){
         // if it has reached a space character then cuts the string until the space
         if(s[counter] == ' '){
+            if(!validDouble(s.substr(prev,counter))){
+                cout << "illegal input";
+                exit(1);
+            }
             v.push_back(stof(s.substr(prev,counter)));
             prev = counter + 1;
         }
