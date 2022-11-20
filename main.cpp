@@ -8,6 +8,9 @@ bool validDouble(string s){
     if(s.empty())
         return false;
     for (int i = 0; i < s.size(); ++i) {
+        if(i == 0 && s[i] == '-'){
+            continue;
+        }
         if(s[i]=='.' && !hadDot) {
             hadDot = true;
             continue;
