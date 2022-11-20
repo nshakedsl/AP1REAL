@@ -78,6 +78,6 @@ int main() {
     printLongDouble(d.manhattenDistance());
     printLongDouble(d.chebyshevDistance());
     printLongDouble(d.canberraDistance());
-    printLongDouble(d.minkowskiDistance(), false);
+    printLongDouble(d.minkowskiDistance());
     return 0;
 }
