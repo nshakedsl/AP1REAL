@@ -5,8 +5,7 @@ using namespace std;
 
 bool validDouble(string s){
     bool hadDot = false;
-    if(s.empty())
-        return false;
+    bool hadDigit = false;
     for (int i = 0; i < s.size(); ++i) {
         if(i == 0 && s[i] == '-'){
             continue;
@@ -17,8 +16,9 @@ bool validDouble(string s){
         }
         if(s[i]<'0'||s[i]>'9')
             return false;
+        hadDigit = true;
     }
-    return true;
+    return hadDigit;
 }
 //parses a string into a vector of ints, needs to get a string composed of numbers seperated by spaces
 void printLongDouble(double value, bool val = true){
