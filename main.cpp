@@ -1,28 +1,32 @@
 #include <iostream>
 #include <vector>
 #include "Distances.h"
+
 using namespace std;
 
-bool validDouble(string s){
+// Makes sure the input string is a valid double
+bool validDouble(string s) {
     bool hadDot = false;
     bool hadDigit = false;
+    // Loops through the string we received
     for (int i = 0; i < s.size(); ++i) {
-        if(i == 0 && s[i] == '-'){
+        if (i == 0 && s[i] == '-') {
             continue;
         }
-        if(s[i]=='.' && !hadDot) {
+        if (s[i] == '.' && !hadDot) {
             hadDot = true;
             continue;
         }
-        if(s[i]<'0'||s[i]>'9')
+        if (s[i] < '0' || s[i] > '9')
             return false;
         hadDigit = true;
     }
     return hadDigit;
 }
+
 //parses a string into a vector of ints, needs to get a string composed of numbers seperated by spaces
-void printLongDouble(double value, bool val = true){
-    if(value-(int)value == 0)
+void printLongDouble(double value, bool val = true) {
+    if (value - (int) value == 0)
         cout.precision(1);
     else
         cout.precision(16);
@@ -31,16 +35,17 @@ void printLongDouble(double value, bool val = true){
         cout << endl;
 }
 
-vector<double> parseString(const string& s){
+// Convert string to vector
+vector<double> parseString(const string &s) {
     int counter = 0;
     int prev = 0;
     string temp;
     vector<double> v;
-    while (counter < s.size()){
+    while (counter < s.size()) {
         // if it has reached a space character then cuts the string until the space
-        if(s[counter] == ' '){
-            temp = s.substr(prev,counter - prev);
-            if(!validDouble(temp)){
+        if (s[counter] == ' ') {
+            temp = s.substr(prev, counter - prev);
+            if (!validDouble(temp)) {
                 cout << "illegal input";
                 exit(1);
             }
@@ -49,8 +54,8 @@ vector<double> parseString(const string& s){
         }
         counter++;
     }
-    temp = s.substr(prev,counter - prev);
-    if(!validDouble(temp)){
+    temp = s.substr(prev, counter - prev);
+    if (!validDouble(temp)) {
         cout << "illegal input";
         exit(1);
     }
@@ -58,29 +63,17 @@ vector<double> parseString(const string& s){
     return v;
 }
 
+int main(int argc, char **arg) {
+    if (argc == 4) {
+        int k = atoi(arg[1]);
+        string file= arg[2];
+        string distance=arg[3];
 
-int main() {
-    string input1, input2;
-    // receives 2 vectors from the user
-    getline(cin,input1, '\n');
-    vector<double> v1 = parseString(input1);
-    getline(cin,input2, '\n');
-    vector<double> v2 = parseString(input2);
-    if(v1.empty()){
-        cout<<"empty vector, bye!"<<endl;
-        return 0;
+
+    } else {
+        cout << "illegal input, Bye!" << endl;
+        exit(1);
     }
-    if(v1.size() != v2.size()){
-        cout<<"illegal input, bye!"<<endl;
-        return 0;
-    }
-    Distances d= Distances(v1, v2);
-    //calculate all distances and print them
-    fixed(cout);
-    printLongDouble(d.euclidianDistance());
-    printLongDouble(d.manhattenDistance());
-    printLongDouble(d.chebyshevDistance());
-    printLongDouble(d.canberraDistance());
-    printLongDouble(d.minkowskiDistance());
+
     return 0;
 }

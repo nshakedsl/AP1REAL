@@ -1,4 +1,3 @@
-
 #include "Distances.h"
 #define P 3
 #include <cmath>
@@ -10,21 +9,24 @@ Distances ::Distances(vector<double> &v1, const vector<double> &v2)
     this->v1 = v1;
     this->v2 = v2;
 }
-// calculate euclidian distance
-double Distances::euclidianDistance()
+
+// calculate canberra distance
+double Distances::canberraDistance()
 {
-    return minkowskiDistanceGeneric(2);
-}
-// calculate manhatten distance
-double Distances::manhattenDistance()
-{
-    return minkowskiDistanceGeneric(1);
+    if (v1.empty())
+        return 0;
+    double distance = 0;
+    for (int i = 0; i < v1.size(); ++i)
+    {
+        distance += (double)abs(v1[i] - v2[i]) / (double)(abs(v1[i]) + abs(v2[i]));
+    }
+    return distance;
 }
 
-//calculate chebyshev distance
+// calculate chebyshev distance
 double Distances::chebyshevDistance()
 {
-    if(v1.empty())
+    if (v1.empty())
         return 0;
     double distance = 0;
     for (int i = 0; i < v1.size(); ++i)
@@ -34,31 +36,34 @@ double Distances::chebyshevDistance()
     }
     return distance;
 }
-// calculate canberra distance
-double Distances::canberraDistance()
+
+// calculate manhatten distance
+double Distances::manhattenDistance()
 {
-    if(v1.empty())
-        return 0;
-    double distance = 0;
-    for (int i = 0; i < v1.size(); ++i)
-    {
-        distance += (double)abs(v1[i] - v2[i]) / (double)(abs(v1[i]) + abs(v2[i]));
-    }
-    return distance;
+    return minkowskiDistanceGeneric(1);
 }
+
+// calculate euclidian distance
+double Distances::euclidianDistance()
+{
+    return minkowskiDistanceGeneric(2);
+}
+
 // calculate minkowski distance
 double Distances::minkowskiDistance()
 {
     return minkowskiDistanceGeneric(P);
 }
+
+// Generic implemention of minkowski distance
 double Distances::minkowskiDistanceGeneric(int exp)
 {
-    if(v1.empty())
+    if (v1.empty())
         return 0;
     double distance = 0;
     for (int i = 0; i < v1.size(); ++i)
     {
         distance += pow(abs(v1[i] - v2[i]), exp);
     }
-    return pow(distance, 1.0 /exp);
+    return pow(distance, 1.0 / exp);
 }
