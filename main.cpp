@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "Distances.h"
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -66,11 +67,26 @@ vector<double> parseString(const string &s) {
 int main(int argc, char **arg) {
     if (argc == 4) {
         int k = atoi(arg[1]);
-        string file= arg[2];
-        string distance=arg[3];
+        string fileName = arg[2];
+        string distance = arg[3];
 
 
-    } else {
+        std::ifstream myFile(fileName);
+        if (!myFile.is_open()){
+            cout << "Could not open file, bye!" << endl;
+            exit(1);
+        }
+        std::string line;
+        while (std::getline(myFile, line)) {
+            std::istringstream s(line);
+            std::string field;
+            while (getline(s, field, ',')) {
+                cout << field << ",";
+            }
+            cout << endl;
+        }
+
+    } else { // Incorrect number of arguments
         cout << "illegal input, Bye!" << endl;
         exit(1);
     }
