@@ -5,11 +5,15 @@
 #include <map>
 
 
-class vectorCollection {
+class VectorCollection {
 private:
     std::multimap<double, std::vector<double>>
     getDistances(const std::vector<double> &vector, const std::string &format);
 public:
+    //  TODO: delete before submit!!
+    void printVectors ();
+
+    VectorCollection()=default;
     std::vector<std::vector<double>> vectorList;
     //supposed to return the closest k vectors to "vector" according to the calculation type specified in format
     std::vector<std::vector < double>> getDistancesK(const std::vector<double> &vector, const std::string &format, int k);

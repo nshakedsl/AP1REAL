@@ -1,17 +1,27 @@
 #include <vector>
-#include "vectorCollection.h"
+#include "VectorCollection.h"
 #include <string>
 #include <iostream>
 #include "Distances.h"
 #include <map>
 
-
 //add vector to map
-void vectorCollection::pushVector(const std::vector<double> &vec) {
+void VectorCollection::pushVector(const std::vector<double> &vec) {
     vectorList.push_back(vec);
 }
 
-std::vector<vector<double>> vectorCollection::getDistancesK(const std::vector<double> &vector, const std::string &format, int k) {
+//  TODO: delete before submit!!
+void VectorCollection::printVectors() {
+    for (std::vector<double> v: vectorList) {
+        for (int i = 0; i < v.size(); ++i) {
+            cout << v.at(i) << ',';
+        }
+        cout << endl;
+    }
+}
+
+std::vector<vector<double>>
+VectorCollection::getDistancesK(const std::vector<double> &vector, const std::string &format, int k) {
     //initializes a sorted multimap
     std::multimap<double, std::vector<double>> sortedVecs = getDistances(vector, format);
     //an empty vector of vectors
@@ -27,13 +37,12 @@ std::vector<vector<double>> vectorCollection::getDistancesK(const std::vector<do
     return kVectors;
 }
 
-private:
 
 //calculate the distance of all the vectors according to the chosen method
 //we assume that the map is actually created sorted by the key
 //returns multimap of distance, vector
 std::multimap<double, std::vector<double>>
-vectorCollection::getDistances(const std::vector<double> &vector, const std::string &format) {
+VectorCollection::getDistances(const std::vector<double> &vector, const std::string &format) {
     //map of vector and distance
     std::multimap<double, std::vector<double>> vectors;
     //iterate over all the vectors

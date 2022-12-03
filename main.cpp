@@ -2,6 +2,8 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include "VectorCollection.h"
+#include <map>
 
 using namespace std;
 
@@ -65,26 +67,42 @@ vector<double> parseString(const string &s) {
 }
 
 int main(int argc, char **arg) {
+
     if (argc == 4) {
         int k = atoi(arg[1]);
         string fileName = arg[2];
         string distance = arg[3];
-
+        VectorCollection vectors = VectorCollection();
 
         std::ifstream myFile(fileName);
-        if (!myFile.is_open()){
+        if (!myFile.is_open()) {
             cout << "Could not open file, bye!" << endl;
             exit(1);
         }
         std::string line;
+        std::map<std::vector<double>, string> classifications;
         while (std::getline(myFile, line)) {
             std::istringstream s(line);
             std::string field;
+            std::vector<double> v;
             while (getline(s, field, ',')) {
-                cout << field << ",";
+                if (validDouble(field)) {
+                    v.push_back(stof(field));
+                } else {
+                    classifications.insert(pair<std::vector<double>, string>(v, field));
+                }
             }
-            cout << endl;
+            vectors.pushVector(v);
         }
+        for (auto const &pair: classifications) {
+            std::cout << "{";
+            for (int i = 0; i < pair.first.size(); ++i) {
+                cout << pair.first.at(i) << ',';
+            }
+            cout << ": " << pair.second << "}\n";
+        }
+        vectors.printVectors();
+
 
     } else { // Incorrect number of arguments
         cout << "illegal input, Bye!" << endl;
