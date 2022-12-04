@@ -94,14 +94,15 @@ int main(int argc, char **arg) {
             }
             vectors.pushVector(v);
         }
-        for (auto const &pair: classifications) {
-            std::cout << "{";
-            for (int i = 0; i < pair.first.size(); ++i) {
-                cout << pair.first.at(i) << ',';
-            }
-            cout << ": " << pair.second << "}\n";
+        string input;
+        // receives vector from the user
+        getline(cin,input, '\n');
+        vector<double> v = parseString(input);
+        // edge case - empty vector
+        if(v.empty()){
+            cout<<"empty vector, bye!"<<endl;
+            return 0;
         }
-        vectors.printVectors();
 
 
     } else { // Incorrect number of arguments
