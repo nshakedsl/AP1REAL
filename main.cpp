@@ -8,23 +8,12 @@
 using namespace std;
 
 // Makes sure the input string is a valid double
-bool validDouble(string s) {
-    bool hadDot = false;
-    bool hadDigit = false;
-    // Loops through the string we received
-    for (int i = 0; i < s.size(); ++i) {
-        if (i == 0 && s[i] == '-') {
-            continue;
-        }
-        if (s[i] == '.' && !hadDot) {
-            hadDot = true;
-            continue;
-        }
-        if (s[i] < '0' || s[i] > '9')
-            return false;
-        hadDigit = true;
-    }
-    return hadDigit;
+bool validDouble(const string& s) {
+    std::istringstream iss(s);
+    float f;
+    iss >> noskipws >> f; // noskipws considers leading whitespace invalid
+    // Check the entire string was consumed and if either failbit or badbit is set
+    return iss.eof() && !iss.fail();
 }
 
 //parses a string into a vector of ints, needs to get a string composed of numbers seperated by spaces
@@ -132,7 +121,7 @@ int main(int argc, char **arg) {
                 }
                 cout << classification << endl;
             }
-            catch (...){
+            catch (...) {
                 cout << "invalid vectors" << endl;
             }
         }
