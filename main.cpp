@@ -122,7 +122,7 @@ int main(int argc, char **arg) {
                 max = it.second;
             }
         }
-        cout << classification;
+        cout << classification << endl;
         // edge case - empty vector
         if(v.empty()){
             cout<<"empty vector, bye!"<<endl;
