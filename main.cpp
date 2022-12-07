@@ -128,14 +128,13 @@ int main(int argc, char **arg) {
             if (v.empty()) {
                 cout << "empty vector, bye!" << endl;
                 return 0;
+            } else { // Incorrect number of arguments
+                cout << "illegal input, Bye!" << endl;
+                exit(1);
             }
-
-
-        } else { // Incorrect number of arguments
-            cout << "illegal input, Bye!" << endl;
-            exit(1);
         }
     }
+
 
     return 0;
 }
