@@ -1,4 +1,3 @@
-#include <vector>
 #include "VectorCollection.h"
 #include <string>
 #include <iostream>
@@ -8,16 +7,6 @@
 //add vector to map
 void VectorCollection::pushVector(const std::vector<double> &vec) {
     vectorList.push_back(vec);
-}
-
-//  TODO: delete before submit!!
-void VectorCollection::printVectors() {
-    for (std::vector<double> v: vectorList) {
-        for (int i = 0; i < v.size(); ++i) {
-            cout << v.at(i) << ',';
-        }
-        cout << endl;
-    }
 }
 
 std::vector<vector<double>>

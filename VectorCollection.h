@@ -3,15 +3,14 @@
 
 #include <string>
 #include <map>
-
+#include <vector>
 
 class VectorCollection {
 private:
     std::multimap<double, std::vector<double>>
     getDistances(const std::vector<double> &vector, const std::string &format);
 public:
-    //  TODO: delete before submit!!
-    void printVectors ();
+
 
     VectorCollection()=default;
     std::vector<std::vector<double>> vectorList;

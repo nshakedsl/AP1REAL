@@ -1,6 +1,7 @@
 #ifndef AP1_DISTANCES_H
 #define AP1_DISTANCES_H
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
 class Distances
