@@ -79,6 +79,7 @@ int main(int argc, char **arg) {
                     v.push_back(stof(field));
                 } else {
                     classifications.insert(pair<std::vector<double>, string>(v, field));
+                    break;
                 }
             }
             vectors.pushVector(v);
