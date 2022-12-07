@@ -99,6 +99,13 @@ int main(int argc, char **arg) {
             // receives vector from the user
             getline(cin, input, '\n');
             vector<double> v = parseString(input);
+
+            // edge case - empty vector
+            if (v.empty()) {
+                cout << "empty vector, bye!" << endl;
+                return 0;
+            }
+
             //get KClosest
             vector<vector<double>> kClosest = vectors.getDistancesK(v, distance, k);
             //a map that counts the occurrence of each classification
@@ -124,15 +131,12 @@ int main(int argc, char **arg) {
                 }
             }
             cout << classification << endl;
-            // edge case - empty vector
-            if (v.empty()) {
-                cout << "empty vector, bye!" << endl;
-                return 0;
-            } else { // Incorrect number of arguments
-                cout << "illegal input, Bye!" << endl;
-                exit(1);
-            }
         }
+
+
+    } else { // Incorrect number of arguments
+        cout << "illegal input, Bye!" << endl;
+        exit(1);
     }
 
 
