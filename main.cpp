@@ -8,7 +8,7 @@
 using namespace std;
 
 // Makes sure the input string is a valid double
-bool validDouble(const string& s) {
+bool validDouble(const string &s) {
     std::istringstream iss(s);
     float f;
     iss >> noskipws >> f; // noskipws considers leading whitespace invalid
@@ -16,16 +16,6 @@ bool validDouble(const string& s) {
     return iss.eof() && !iss.fail();
 }
 
-//parses a string into a vector of ints, needs to get a string composed of numbers seperated by spaces
-void printLongDouble(double value, bool val = true) {
-    if (value - (int) value == 0)
-        cout.precision(1);
-    else
-        cout.precision(16);
-    cout << value;
-    if (val)
-        cout << endl;
-}
 
 // Convert string to vector
 vector<double> parseString(const string &s) {
@@ -74,12 +64,18 @@ int main(int argc, char **arg) {
             std::istringstream s(line);
             std::string field;
             std::vector<double> v;
+            bool isClassified = false;
             while (getline(s, field, ',')) {
+                if (isClassified) {
+                    cout << "illegal file, Bye!" << endl;
+                    exit(1);
+                }
                 if (validDouble(field)) {
                     v.push_back(stof(field));
+
                 } else {
                     classifications.insert(pair<std::vector<double>, string>(v, field));
-                    break;
+                    isClassified = true;
                 }
             }
             vectors.pushVector(v);
