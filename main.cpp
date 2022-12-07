@@ -11,8 +11,7 @@ using namespace std;
 bool validDouble(const string &s) {
     std::istringstream iss(s);
     float f;
-    iss >> noskipws >> f; // noskipws considers leading whitespace invalid
-    // Check the entire string was consumed and if either failbit or badbit is set
+    iss >> noskipws >> f;
     return iss.eof() && !iss.fail();
 }
 
@@ -48,32 +47,39 @@ vector<double> parseString(const string &s) {
 int main(int argc, char **arg) {
 
     if (argc == 4) {
+        // receive arguments from terminal
         int k = atoi(arg[1]);
         string fileName = arg[2];
         string distance = arg[3];
         VectorCollection vectors = VectorCollection();
 
         std::ifstream myFile(fileName);
+        // file not found
         if (!myFile.is_open()) {
             cout << "Could not open file, bye!" << endl;
             exit(1);
         }
         std::string line;
         std::map<std::vector<double>, string> classifications;
+        // read file line by line
         while (std::getline(myFile, line)) {
             std::istringstream s(line);
             std::string field;
             std::vector<double> v;
             bool isClassified = false;
+            // read line field by field
             while (getline(s, field, ',')) {
+                // there are numbers after classification
                 if (isClassified) {
                     cout << "illegal file, Bye!" << endl;
                     exit(1);
                 }
+                // add field to vector
                 if (validDouble(field)) {
                     v.push_back(stof(field));
 
                 } else {
+                    // finish reading vector, add classification to classifications map
                     classifications.insert(pair<std::vector<double>, string>(v, field));
                     isClassified = true;
                 }
