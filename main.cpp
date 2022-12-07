@@ -95,46 +95,47 @@ int main(int argc, char **arg) {
             vectors.pushVector(v);
         }
         string input;
-        // receives vector from the user
-        getline(cin,input, '\n');
-        vector<double> v = parseString(input);
-        //get KClosest
-        vector<vector<double>> kClosest = vectors.getDistancesK(v,distance,k);
-        //a map that counts the occurrence of each classification
-        map<string,int> classificationCount;
-        //iterates over the k closest vectors and initializes the map according to their classifications
-        for(vector<double> vector: kClosest){
-            //if the value is absent in the map, add it
-            if(classificationCount.find(classifications[vector])==classificationCount.end())
-                classificationCount.insert(pair<string,int>(classifications[vector],1));
-            //if the value isn't absent increment it
-            else
-                classificationCount[classifications[vector]] += 1;
-        }
-        int max = -1;
-        string classification = "no classification found";
-        //goes over all the counts of each classification to find the most common one
-        for (auto & it : classificationCount) {
-            //if the current value is larger than the max then set the current value to the max
-            // and the string to the current tag
-            if(it.second>max){
-                classification = it.first;
-                max = it.second;
+        while (true) {
+            // receives vector from the user
+            getline(cin, input, '\n');
+            vector<double> v = parseString(input);
+            //get KClosest
+            vector<vector<double>> kClosest = vectors.getDistancesK(v, distance, k);
+            //a map that counts the occurrence of each classification
+            map<string, int> classificationCount;
+            //iterates over the k closest vectors and initializes the map according to their classifications
+            for (vector<double> vector: kClosest) {
+                //if the value is absent in the map, add it
+                if (classificationCount.find(classifications[vector]) == classificationCount.end())
+                    classificationCount.insert(pair<string, int>(classifications[vector], 1));
+                    //if the value isn't absent increment it
+                else
+                    classificationCount[classifications[vector]] += 1;
             }
-        }
-        cout << classification << endl;
-        // edge case - empty vector
-        if(v.empty()){
-            cout<<"empty vector, bye!"<<endl;
-            return 0;
-        }
+            int max = -1;
+            string classification = "no classification found";
+            //goes over all the counts of each classification to find the most common one
+            for (auto &it: classificationCount) {
+                //if the current value is larger than the max then set the current value to the max
+                // and the string to the current tag
+                if (it.second > max) {
+                    classification = it.first;
+                    max = it.second;
+                }
+            }
+            cout << classification << endl;
+            // edge case - empty vector
+            if (v.empty()) {
+                cout << "empty vector, bye!" << endl;
+                return 0;
+            }
 
 
-    } else { // Incorrect number of arguments
-        cout << "illegal input, Bye!" << endl;
-        exit(1);
+        } else { // Incorrect number of arguments
+            cout << "illegal input, Bye!" << endl;
+            exit(1);
+        }
     }
-
 
     return 0;
 }
