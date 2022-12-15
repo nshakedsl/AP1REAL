@@ -66,24 +66,19 @@ int main(int argc, char **arg) {
             std::istringstream s(line);
             std::string field;
             std::vector<double> v;
-            bool isClassified = false;
+            std::vector<string> input;
             // read line field by field
             while (getline(s, field, ',')) {
-                // there are numbers after classification
-                if (isClassified) {
-                    cout << "illegal file, Bye!" << endl;
-                    exit(1);
-                }
+                input.push_back(field);
+            }
+            for (int i = 0; i < input.size() - 1; i++) {
                 // add field to vector
-                if (validDouble(field)) {
-                    v.push_back(stof(field));
-
-                } else {
-                    // finish reading vector, add classification to classifications map
-                    classifications.insert(pair<std::vector<double>, string>(v, field));
-                    isClassified = true;
+                if (validDouble(input.at(i))) {
+                    v.push_back(stof(input.at(i)));
                 }
             }
+            // finish reading vector, add classification to classifications map
+            classifications.insert(pair<std::vector<double>, string>(v, input.at(input.size()-1)));
             vectors.pushVector(v);
         }
         string input;
