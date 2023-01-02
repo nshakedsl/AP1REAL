@@ -6,8 +6,13 @@
 #include "Parser.h"
 
 class Parser {
+    std::vector<std::string> components;
 public:
-    bool validInput(std::string);
+    explicit Parser(const std::string& s);
+    bool validInput();
+    int getK();
+    std::string getDistance();
+    std::vector<double> getVector();
 
 };
 

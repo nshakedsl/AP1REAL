@@ -63,9 +63,15 @@ std::vector<std::string> parseToComponents(const std::string& s){
 
     return components;
 }
-bool validDist(std::string s){
+//initialize a Parser
+Parser::Parser(const std::string& s) {
+    this->components = parseToComponents(s);
+}
+//check if the part which is supposed to represent the distance actually represents a valid distance
+bool validDist(const std::string& s){
     return s == "AUC" || s == "MAN" || s == "CHB" || s == "CAN" || s == "MIN";
 }
+//check if the part which is supposed to represent the number k is actually a valid number
 bool isNumber(const std::string& s)
 {
     for (char const &ch : s) {
@@ -76,8 +82,7 @@ bool isNumber(const std::string& s)
 }
 //input: the string given by the user
 //output: whether the input string is a valid input according to the given format
-bool Parser::validInput(std::string s) {
-    std::vector<std::string> components = parseToComponents(s);
+bool Parser::validInput() {
     if(components.size()!=3)
         return false;
     std::vector<double> vector = parseString(components.at(0));
@@ -89,4 +94,31 @@ bool Parser::validInput(std::string s) {
         return false;
     //check if the vector field is a legal number
     return isNumber(components.at(2));
+}
+//converts the 3rd argument to the k value
+int Parser::getK() {
+    try {
+        return std::stoi(components.at(2));
+    }
+    catch (...){
+        throw std::invalid_argument("illegal string given");
+    }
+}
+
+std::string Parser::getDistance() {
+    try {
+        return components.at(1);
+    }
+    catch (...){
+        throw std::invalid_argument("illegal string given");
+    }
+}
+
+std::vector<double> Parser::getVector() {
+    try {
+        return parseString(components.at(0));
+    }
+    catch (...){
+        throw std::invalid_argument("illegal string given");
+    }
 }

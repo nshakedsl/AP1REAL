@@ -17,7 +17,7 @@ class Client {
 private:
     int cl_socket;
 public:
-    Client(char* ip,int port);
+    Client(const char* ip,int port);
     void run();
 };
 

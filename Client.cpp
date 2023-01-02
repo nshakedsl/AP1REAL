@@ -4,30 +4,7 @@
 #include "Client.h"
 #include <iostream>
 //todo: extract me
-int main(int argc, char **arg) {
-    //validate enough arguments
-    if (argc != 3) {
-        std::cout << "illegal arguments" << std::endl;
-        exit(1);
-    }
-    //validate the port
-    int port;
-    try {
-        port = std::stoi(arg[2]);
-        if (port > 65535 || port < 1) {
-            std::cout << "illegal port" << std::endl;
-            exit(1);
-        }
-    }
-        //exit for invalid port
-    catch (...) {
-        std::cout << "illegal port" << std::endl;
-        exit(1);
-    }
-    //todo: validate ip
-    const char *ip_address = "127.0.0.1";
-    return 0;
-}
+
 
 void Client::run() {
     char buffer[4096];
@@ -66,7 +43,7 @@ void Client::run() {
     }
 }
 
-Client::Client(char *ip, int port) {
+Client::Client(const char *ip, int port) {
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
         perror("error creating socket");
