@@ -16,6 +16,8 @@ VectorCollection::getDistancesK(const std::vector<double> &vector, const std::st
     //an empty vector of vectors
     std::vector<std::vector<double>> kVectors;
     int counter = 0;
+    if (k > vectorList.size())
+        return kVectors;
     //adds the first k vectors in the map
     for (auto &sortedVec: sortedVecs) {
         if (counter == k)
