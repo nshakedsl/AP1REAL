@@ -3,15 +3,14 @@
 #define AP1REAL_CLIENT_H
 
 #include <iostream>
-#include <bits/socket.h>
-#include <bits/socket_type.h>
-#include <sys/socket.h>
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include "cstring"
+#include "Parser.h"
+#include <iostream>
 
 class Client {
 private:

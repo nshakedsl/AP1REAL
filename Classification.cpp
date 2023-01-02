@@ -1,5 +1,4 @@
 #include "Classification.h"
-#include <utility>
 // constructor
 Classification::Classification(const std::vector<double> &v, std::string distance, int k, VectorCollection vectors,
                                std::map<std::vector<double>, std::string> classifications) {

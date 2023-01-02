@@ -1,7 +1,6 @@
 #include "Distances.h"
 #define P 3
 #include <cmath>
-#include <iostream>
 
 using namespace std;
 // constructor

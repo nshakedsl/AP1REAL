@@ -1,9 +1,7 @@
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include "File.h"
-File::File( std::string fileName) {
+
+File::File(std::string fileName) {
     this->fileName = fileName;
 
     std::ifstream myFile(fileName);

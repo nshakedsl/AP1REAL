@@ -5,6 +5,9 @@
 
 #include <string>
 #include "VectorCollection.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 class File {
     //members

@@ -1,8 +1,7 @@
 
 #include <vector>
 #include "Client.h"
-#include "Parser.h"
-#include <iostream>
+
 
 //runs the client until
 void Client::run() {
