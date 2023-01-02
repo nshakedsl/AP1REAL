@@ -2,24 +2,33 @@
 #include <vector>
 #include <sstream>
 #include "Client.h"
+#include "Parser.h"
 #include <iostream>
 //todo: extract me
 
 
 void Client::run() {
     char buffer[4096];
+    const char *input;
     int read_bytes;
     int expected_data_len = sizeof(buffer);
     unsigned long data_len;
     long sent_bytes;
     while (true) {
         //get input from user
-        //getline(std::cin, buffer);
-        std::cin>>buffer;
+        //getline(std::cin, input);
+        scanf("%[^\n]", buffer);
+        //std::cin>>buffer;
+        strcpy(buffer,input);
         //input -1 signals that the client is done sending things
         if (strcmp(buffer, "-1") == 0) {
             close(cl_socket);
             break;
+        }
+        Parser parser = Parser(buffer);
+        if(!parser.validInput()) {
+            std::cout << "input invalid" << std::endl;
+            continue;
         }
         data_len = strlen(buffer);
         sent_bytes = send(cl_socket, buffer, data_len, 0);
