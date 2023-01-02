@@ -4,11 +4,12 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <cstring>
+#include <utility>
 #include "Server.h"
 
 Server::Server(int port, std::string file) {
     this->port = port;
-    this->file = file;
+    this->file = std::move(file);
 }
 
 //serves a given client properly

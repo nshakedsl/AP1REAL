@@ -1,8 +1,6 @@
 
 #ifndef AP1_CLASSIFICATION_H
 #define AP1_CLASSIFICATION_H
-
-
 #include <vector>
 #include <string>
 #include "VectorCollection.h"
