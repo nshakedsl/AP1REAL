@@ -3,6 +3,7 @@
 #include <string>
 #include "Parser.h"
 #include "Classification.h"
+#include "File.h"
 
 class Server {
 private:

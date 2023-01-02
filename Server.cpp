@@ -6,7 +6,7 @@
 #include <cstring>
 #include "Server.h"
 
-Server::Server(int port,std::string file) {
+Server::Server(int port, std::string file) {
     this->port = port;
     this->file = file;
 }
@@ -14,7 +14,7 @@ Server::Server(int port,std::string file) {
 //serves a given client properly
 void Server::serve(int client_sock) {
     char buffer[4096];
-    //
+    //serves a given character
     while (true) {
         int expected_data_len = sizeof(buffer);
         long read_bytes = recv(client_sock, buffer, expected_data_len, 0);
@@ -22,7 +22,7 @@ void Server::serve(int client_sock) {
         if (read_bytes == 0) {
             close(client_sock);
             return;
-        //negative bytes read indicate an error has occurred
+            //negative bytes read indicate an error has occurred
         } else if (read_bytes < 0) {
             perror("error reading bytes to client");
             close(client_sock);
@@ -31,8 +31,11 @@ void Server::serve(int client_sock) {
         //everything was fine, check client message
         Parser parser = Parser(buffer);
         if (parser.validInput()) {
-            //todo: fix me
-        //Classification classification = Classification();
+            File file1 = File(file);
+            Classification classification = Classification(parser.getVector(), parser.getDistance(),
+                                                           parser.getK(), file1.getVectors(),
+                                                           file1.getClassifications());
+            strcpy(buffer, classification.getClassification().c_str());
         } else {
             strcpy(buffer, "invalid input");
         }
@@ -62,7 +65,7 @@ void Server::run() {
         exit(1);
     }
     //runs forever, continuously serves clients one after another
-    while (true){
+    while (true) {
         //tries to accept a socket
         if (listen(sock, 5) < 0) {
             perror("error listening to a socket");
