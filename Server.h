@@ -6,7 +6,7 @@ class Server {
 private:
     int port;
     std::string file;
-    void serve();
+    void serve(int socket);
 public:
     Server(int port,std::string file);
     void run();
