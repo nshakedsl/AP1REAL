@@ -1,15 +1,13 @@
-
 #include "Classification.h"
-
-
+#include <utility>
 // constructor
 Classification::Classification(const std::vector<double> &v, std::string distance, int k, VectorCollection vectors,
                                std::map<std::vector<double>, std::string> classifications) {
     this->v = v;
-    this->distance = distance;
+    this->distance = std::move(distance);
     this->k = k;
-    this->vectors = vectors;
-    this->classifications = classifications;
+    this->vectors = std::move(vectors);
+    this->classifications = std::move(classifications);
 }
 
 std::string Classification::getClassification() {
@@ -17,10 +15,10 @@ std::string Classification::getClassification() {
     std::vector<std::vector<double>> kClosest = vectors.getDistancesK(v, distance, k);
     //a map that counts the occurrence of each classification
     std::map<std::string, int> classificationCount;
-    //iterates over the k  closest vectors and initializes the map according to their classifications
-    if (kClosest.size() == 0)
+    //iterates over the k the closest vectors and initializes the map according to their classifications
+    if (kClosest.empty())
         return "";
-    for (std::vector<double> vector: kClosest) {
+    for (const std::vector<double>& vector: kClosest) {
         //if the value is absent in the map, add it
         if (classificationCount.find(classifications[vector]) == classificationCount.end())
             classificationCount.insert(std::pair<std::string, int>(classifications[vector], 1));

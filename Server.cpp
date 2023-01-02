@@ -16,14 +16,26 @@ void Server::serve(int client_sock) {
     char buffer[4096];
     int expected_data_len = sizeof(buffer);
     long read_bytes = recv(client_sock, buffer, expected_data_len, 0);
+    //empty message signals close connection
     if (read_bytes == 0) {
-        // connection is closed
+        close(client_sock);
+        return;
+    //negative bytes read indicate an error has occured
     } else if (read_bytes < 0) {
-        // error
-    } else {
-        std::cout << buffer;
+        perror("error reading bytes to client");
+        close(client_sock);
+        return;
     }
-    int sent_bytes = send(client_sock, buffer, read_bytes, 0);
+    //everything was fine, check client message
+    Parser parser = Parser(buffer);
+    if(parser.validInput()){
+        //todo: fix me
+        //Classification classification = Classification();
+    } else{
+        strcpy(buffer,"invalid input");
+    }
+    unsigned long bytes_sent = strlen(buffer);
+    long sent_bytes = send(client_sock, buffer, bytes_sent, 0);
     if (sent_bytes < 0) {
         perror("error sending to client");
     }

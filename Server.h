@@ -1,6 +1,8 @@
 #ifndef AP1REAL_SERVER_H
 #define AP1REAL_SERVER_H
 #include <string>
+#include "Parser.h"
+#include "Classification.h"
 
 class Server {
 private:
