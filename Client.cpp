@@ -1,12 +1,10 @@
 
 #include <vector>
-#include <sstream>
 #include "Client.h"
 #include "Parser.h"
 #include <iostream>
-//todo: extract me
 
-
+//runs the client until
 void Client::run() {
     char buffer[4096];
     const char *input;
@@ -14,6 +12,7 @@ void Client::run() {
     int expected_data_len = sizeof(buffer);
     unsigned long data_len;
     long sent_bytes;
+    //run until the user sends '-1' which is supposed to represent end of input from the user
     while (true) {
         //get input from user
         //getline(std::cin, input);

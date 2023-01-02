@@ -1,16 +1,16 @@
-#include <iostream>
-#include <bits/socket.h>
-#include <bits/socket_type.h>
-#include <sys/socket.h>
-#include <iostream>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+#ifndef AP1REAL_SERVER_H
+#define AP1REAL_SERVER_H
+#include <string>
 
 class Server {
-
+private:
+    int port;
+    std::string file;
+    void serve();
+public:
+    Server(int port,std::string file);
+    void run();
 };
 
 
-#endif //AP1_SERVER_H
+#endif //AP1REAL_SERVER_H
