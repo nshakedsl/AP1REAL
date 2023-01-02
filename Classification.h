@@ -24,6 +24,8 @@ public:
                    std::map<std::vector<double>, std::string> classifications);
 
     // Classification functions
+    // get the classification of v
+    // invalid input : k > database.length return ""
     std::string getClassification();
 
 
