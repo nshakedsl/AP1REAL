@@ -50,7 +50,8 @@ void Client::run() {
             exit(1);
         }
         else{
-            std::cout << buffer;
+            buffer[read_bytes] = '\0';
+            std::cout << buffer << std::endl;
         }
     }
 }
@@ -70,6 +71,7 @@ Client::Client(const char *ip, int port) {
     // connect to the server
     if (connect(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error connecting to server");
+        exit(1);
     }
     this->cl_socket = sock;
 }
@@ -94,7 +96,7 @@ int main(int argc, char **arg) {
         exit(1);
     }
     //todo: validate ip
-    const char *ip_address = "127.0.0.1";
+    char* ip_address = arg[1];
     Client client = Client(ip_address,port);
     client.run();
     return 0;
