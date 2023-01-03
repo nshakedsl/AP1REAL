@@ -43,18 +43,18 @@ std::vector<double> parseString(const std::string &s) {
  */
 std::vector<std::string> parseToComponents(const std::string& s){
     std::vector<std::string> components;
-    int prev = -2, cur = -1;
+    int prev = -3, cur = -1;
     int size = s.length();
     for(int i = 0; i < size; ++i){
         if(s[i] == ' '){
-            prev = cur;
+            prev = cur +1;
             cur = i;
         }
     }
     if(prev<=0)
         return components;
-    components.push_back(s.substr(0,prev));
-    components.push_back(s.substr(prev+1,cur-prev));
+    components.push_back(s.substr(0,prev-1));
+    components.push_back(s.substr(prev,cur-prev));
     components.push_back(s.substr(cur+1,size-cur));
 
     return components;

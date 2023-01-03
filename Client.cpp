@@ -1,21 +1,28 @@
 #include "Client.h"
 #include <iostream>
 
+void str_copy(char* dest, const std::string& src){
+    unsigned long length = src.length();
+    for (int i = 0; i < length; ++i) {
+        dest[i] = src[i];
+    }
+    dest[length] = '\0';
+}
 //runs the client until
 void Client::run() {
     char buffer[4096];
-    const char *input;
     int read_bytes;
     int expected_data_len = sizeof(buffer);
     unsigned long data_len;
     long sent_bytes;
     //run until the user sends '-1' which is supposed to represent end of input from the user
     while (true) {
+        std::string input;
         //get input from user
-        //getline(std::cin, input);
-        scanf("%[^\n]", buffer);
+        getline(std::cin, input,'\n');
+        //scanf("%[^\n]", buffer);
         //std::cin>>buffer;
-        strcpy(buffer,input);
+        str_copy(buffer,input);
         //input -1 signals that the client is done sending things
         if (strcmp(buffer, "-1") == 0) {
             close(cl_socket);
@@ -23,7 +30,7 @@ void Client::run() {
         }
         Parser parser = Parser(buffer);
         if(!parser.validInput()) {
-            std::cout << "input invalid" << std::endl;
+            std::cout << "invalid input" << std::endl;
             continue;
         }
         data_len = strlen(buffer);

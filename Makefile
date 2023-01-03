@@ -1,8 +1,8 @@
 make: server.out client.out
 client.out:
-	g++ -std=c++11 Client.cpp Parser.cpp
+	g++ -o client.out -std=c++11 Client.cpp Parser.cpp
 server.out:
-	g++ -std=c++11 Classification.cpp Distances.cpp File.cpp Parser.cpp Server.cpp VectorCollection.cpp
+	g++ -o server.out -std=c++11 Classification.cpp Distances.cpp File.cpp Parser.cpp Server.cpp VectorCollection.cpp
 clean:
 	rm -f *.o server.out
 	rm -f *.o client.out
