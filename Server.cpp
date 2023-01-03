@@ -32,6 +32,8 @@ void Server::serve(int client_sock) {
                                                            parser.getK(), file1.getVectors(),
                                                            file1.getClassifications());
             strcpy(buffer, classification.getClassification().c_str());
+            if(!strlen(buffer))
+                strcpy(buffer, "invalid input");
         } else {
             strcpy(buffer, "invalid input");
         }
