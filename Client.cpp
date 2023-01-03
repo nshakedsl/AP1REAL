@@ -20,15 +20,12 @@ void Client::run() {
         std::string input;
         //get input from user
         getline(std::cin, input,'\n');
-        //scanf("%[^\n]", buffer);
-        //std::cin>>buffer;
         str_copy(buffer,input);
         //input -1 signals that the client is done sending things
         if (strcmp(buffer, "-1") == 0) {
             close(cl_socket);
             break;
         }
-        std::cout << "buffer: " << buffer << std::endl;
         Parser parser = Parser(buffer);
         if(!parser.validInput()) {
             std::cout << "invalid input" << std::endl;
@@ -96,7 +93,6 @@ int main(int argc, char **arg) {
         std::cout << "illegal port" << std::endl;
         exit(1);
     }
-    //todo: validate ip
     char* ip_address = arg[1];
     Client client = Client(ip_address,port);
     client.run();

@@ -21,7 +21,6 @@ std::vector<double> parseString(const std::string &s) {
             temp = s.substr(prev, counter - prev);
             if (!validDouble(temp)) {
                 return {};
-                //throw std::invalid_argument("illegal character in vector");
             }
             v.push_back(stof(temp));
             prev = counter + 1;
@@ -31,7 +30,6 @@ std::vector<double> parseString(const std::string &s) {
     temp = s.substr(prev, counter - prev);
     if (!validDouble(temp)) {
         return {};
-        //throw std::invalid_argument("illegal character in vector");
     }
     v.push_back(stof(temp));
     return v;

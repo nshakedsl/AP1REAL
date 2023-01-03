@@ -26,10 +26,6 @@ void Server::serve(int client_sock) {
         }
         //everything was fine, check client message
         Parser parser = Parser(buffer);
-        std::cout <<"distance: " << parser.getDistance() << std::endl;
-        std::cout << "K: "<< parser.getK() << std::endl;
-        std::cout <<"valid: " <<parser.validInput() << std::endl;
-        std::cout << "buffer: " << buffer << std::endl;
         if (parser.validInput()) {
             File file1 = File(file);
             Classification classification = Classification(parser.getVector(), parser.getDistance(),
@@ -107,7 +103,6 @@ int main(int argc, char **arg) {
         std::cout << "illegal port" << std::endl;
         exit(1);
     }
-    //todo: validate file?
     Server server = Server(server_port,arg[1]);
     server.run();
     return 0;
