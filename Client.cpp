@@ -28,12 +28,13 @@ void Client::run() {
             close(cl_socket);
             break;
         }
+        std::cout << "buffer: " << buffer << std::endl;
         Parser parser = Parser(buffer);
         if(!parser.validInput()) {
             std::cout << "invalid input" << std::endl;
             continue;
         }
-        data_len = strlen(buffer);
+        data_len = strlen(buffer) + 1;
         sent_bytes = send(cl_socket, buffer, data_len, 0);
         if (sent_bytes < 0) {
             perror("failed to send to the client");
