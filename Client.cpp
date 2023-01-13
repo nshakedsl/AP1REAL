@@ -73,7 +73,7 @@ Client::Client(const char *ip, int port) {
     }
     this->cl_socket = sock;
 }
-int main(int argc, char **arg) {
+/*int main(int argc, char **arg) {
     //validate enough arguments
     if (argc != 3) {
         std::cout << "illegal arguments" << std::endl;
@@ -97,4 +97,4 @@ int main(int argc, char **arg) {
     Client client = Client(ip_address,port);
     client.run();
     return 0;
-}
+}*/

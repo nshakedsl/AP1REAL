@@ -83,7 +83,7 @@ void Server::run() {
 
 
 }
-int main(int argc, char **arg) {
+/*int main(int argc, char **arg) {
     //validate enough arguments
     if (argc != 3) {
         perror("illegal arguments");
@@ -106,4 +106,4 @@ int main(int argc, char **arg) {
     Server server = Server(server_port,arg[1]);
     server.run();
     return 0;
-}
+}*/

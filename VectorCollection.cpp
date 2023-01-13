@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Distances.h"
 #include <map>
+#include <utility>
 
 //add vector to map
 void VectorCollection::pushVector(const std::vector<double> &vec) {
@@ -16,7 +17,7 @@ VectorCollection::getDistancesK(const std::vector<double> &vector, const std::st
     //an empty vector of vectors
     std::vector <std::vector<double>> kVectors;
     int counter = 0;
-    if (k > vectorList.size() || sortedVecs.size() == 0)
+    if (k > vectorList.size() || sortedVecs.empty())
         return kVectors;
     //adds the first k vectors in the map
     for (auto &sortedVec: sortedVecs) {
@@ -67,4 +68,8 @@ VectorCollection::getDistances(const std::vector<double> &vector, const std::str
     }
     //returns the list of distance, vector
     return vectors;
+}
+
+VectorCollection::VectorCollection(std::vector<std::vector<double>> vectors) {
+    vectorList = std::move(vectors);
 }

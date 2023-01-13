@@ -9,10 +9,11 @@
 
 class Solver {
 private:
-    std::unordered_map<std::string ,std::vector<double>> train;
+    std::map<std::vector<double>,std::string> train;
     std::vector<std::vector<double>> test;
     int k = -1;
     std::string metric;
+    std::map<int,std::string> results;
 public:
     Solver() = default;
     //todo::implement setTrain and setTest
@@ -22,6 +23,15 @@ public:
     void setTest(const std::string& s);
     //sets the KNN params given a string that represents them
     void setParams(std::string s);
+    //returns the desired K
+    int getK() const;
+    //returns the desired metric
+    std::string getMetric();
+    //returns the training set
+    void calculateResults();
+    std::map<int,std::string> getResults();
+    bool beenInitialized();
+
 };
 
 
