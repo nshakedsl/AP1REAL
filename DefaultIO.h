@@ -3,11 +3,13 @@
 
 
 #include <string>
-
+//a generic representation of the IO
 class DefaultIO {
 
 public:
+    //read from the IO stream
     virtual std::string read();
+    //write to said IO stream
     virtual void write(const std::string &x);
 };
 

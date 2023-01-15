@@ -3,7 +3,7 @@
 DownloadRes::DownloadRes() {
     description = "download results";
 }
-
+//adds the results, numbered one line after another
 void DownloadRes::execute() {
     std::string res;
     for (int i = 0; i < solver.getResults().size(); ++i) {

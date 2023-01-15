@@ -3,7 +3,7 @@
 DisplayResults::DisplayResults() {
     description = "display results";
 }
-
+//adds the results, numbered one line after another
 void DisplayResults::execute() {
     std::string res;
     for (int i = 0; i < solver.getResults().size(); ++i) {

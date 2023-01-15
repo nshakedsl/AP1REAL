@@ -4,6 +4,7 @@ setParams::setParams() {
 }
 
 void setParams::execute() {
+    //send the user the KNN parameters
     io->write("The current KNN parameters are: K = " + std::to_string(solver.getK()) + ", distance metric = "
               + solver.getMetric()+"\n");
     std::string str = io->read();
