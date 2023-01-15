@@ -55,7 +55,10 @@ std::map<int, std::string> Solver::getResults() {
 bool Solver::beenInitialized() {
     return !train.empty();
 }
-//todo: implement results
+//todo: implement results, make sure the order is kept
 void Solver::calculateResults() {
-    //todo: iterate over each vector and create a Classification object for him, put the result in the results field
+    for(int i = 0; i <  test.size(); ++i){
+        Classification classification = Classification(test.at(i),getMetric(),getK(),train);
+        results.insert({i,classification.getClassification()});
+    }
 }

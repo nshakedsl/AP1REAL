@@ -21,7 +21,10 @@ public:
                    int k,
                    VectorCollection vectors,
                    std::map<std::vector<double>, std::string> classifications);
-
+    Classification(const std::vector<double> &v,
+                   std::string distance,
+                   int k,
+                   std::map<std::vector<double>, std::string> classifications);
     // Classification functions
     // get the classification of v
     // invalid input : k > database.length return ""

@@ -6,7 +6,7 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
-
+#include "Classification.h"
 class Solver {
 private:
     std::map<std::vector<double>,std::string> train;

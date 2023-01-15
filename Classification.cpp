@@ -8,6 +8,18 @@ Classification::Classification(const std::vector<double> &v, std::string distanc
     this->vectors = std::move(vectors);
     this->classifications = std::move(classifications);
 }
+Classification::Classification(const std::vector<double> &v, std::string distance, int k,
+                               std::map<std::vector<double>, std::string> classifications) {
+    this->v = v;
+    this->distance = std::move(distance);
+    this->k = k;
+    std::vector<std::vector<double>> keys;
+    for (auto & classification : classifications) {
+        keys.push_back(classification.first);
+    }
+    this->vectors = VectorCollection::VectorCollectionInit(keys);
+    this->classifications = std::move(classifications);
+}
 
 std::string Classification::getClassification() {
     //get KClosest

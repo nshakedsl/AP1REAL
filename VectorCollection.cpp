@@ -70,6 +70,13 @@ VectorCollection::getDistances(const std::vector<double> &vector, const std::str
     return vectors;
 }
 
-VectorCollection::VectorCollection(std::vector<std::vector<double>> vectors) {
-    vectorList = std::move(vectors);
+VectorCollection VectorCollection::VectorCollectionInit(const std::vector<std::vector<double>>& vectors) {
+    VectorCollection vectorCollect = VectorCollection();
+    for(const auto & vector : vectors){
+        vectorCollect.pushVector(vector);
+    }
+    return vectorCollect;
 }
+
+
+VectorCollection::VectorCollection() = default;

@@ -17,6 +17,5 @@ int main(){
     catch (...)  {
         std::cout << "Default Exception\n";
     }
-    cmd->read();
     return 0;
 }
