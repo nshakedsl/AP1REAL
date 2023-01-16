@@ -7,6 +7,7 @@
 #include <cstring>
 #include "CLI.h"
 #include "SocketIO.h"
+#include "FileIO.h"
 #define MAX_SIZE 4096
 
 int main(int argc, char **arg) {
@@ -51,23 +52,39 @@ int main(int argc, char **arg) {
     //talking with the server
     int choice;
     std::string input;
+    FileIO fileIo = FileIO();
     while (true) {
         std::cout << socketIo.read();
         std::cin >> choice;
+        socketIo.write(std::to_string(choice));
         switch (choice) {
             case 1:
-
+                std::cout << socketIo.read() << std::endl;
+                std::cin >> input;
+                fileIo.setPath(input);
+                socketIo.write(fileIo.read());
+                std::cout << socketIo.read() << std::endl;
+                std::cin >> input;
+                fileIo.setPath(input);
+                socketIo.write(fileIo.read());
+                std::cout << socketIo.read() << std::endl; 
                 break;
             //set KNN for the server
             case 2:
                 //get input from user
-                socketIo.write("2");
                 std::cout << socketIo.read();
                 getline(std::cin, input,'\n');
                 socketIo.write(input);
                 input = socketIo.read();
                 if(input != "OK")
                     std::cout << input;
+                break;
+            case 3:
+            case 4:
+                std::cout << socketIo.read();
+                break;
+            case 5:
+
                 break;
             case 8:
                 //todo: free all
