@@ -44,27 +44,44 @@ int main(int argc, char **arg) {
     if (connect(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error connecting to server");
     }
+    std::map<int,Command*> commands;
+    CLI cli = CLI(commands);
     //talking with the server
     char buffer[MAX_SIZE];
+    int choice;
+    std::string input;
     while (true) {
-        char data_addr[] = "Im a message";
+        int expected_data_len = sizeof(buffer);
+        int read_bytes = recv(sock, buffer, expected_data_len, 0);
+        if (read_bytes <= 0) {
+            std::cout << "error" << std::endl;
+            exit(1);
+        } else {
+            std::cout << buffer << std::endl;
+        }
+        std::cin >> choice;
+        switch (choice) {
+            case 1:
+
+                break;
+            case 2:
+                //get input from user
+                getline(std::cin, input,'\n');
+            case 8:
+                //todo: free all
+                close(sock);
+                return 0;
+            default:
+                std::cout << "invalid input" << std::endl;
+        }
+    }
+}
+/*
+ *         char data_addr[] = "Im a message";
         int data_len = strlen(data_addr);
         int sent_bytes = send(sock, data_addr, data_len, 0);
         if (sent_bytes < 0) {
             //todo: set error message
             std::perror("error message");
         }
-        int expected_data_len = sizeof(buffer);
-        int read_bytes = recv(sock, buffer, expected_data_len, 0);
-        if (read_bytes == 0) {
-            std::cout << "error" << std::endl;
-            break;
-        } else if (read_bytes < 0) {
-
-        } else {
-            std::cout << buffer;
-        }
-    }
-    close(sock);
-    return 0;
-}
+ */

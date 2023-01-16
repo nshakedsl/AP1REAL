@@ -10,11 +10,15 @@ std::string CLI::genDisplay() {
     std::map<int,Command>::iterator it;
     std::string Display;
     for (auto const& x : commands){
-        Display += std::to_string(x.first) + " ." + x.second->getDescription() + "\n";
+        Display += std::to_string(x.first) + ". " + x.second->getDescription() + "\n";
     }
     return Display;
 }
 
 std::string CLI::getDisplay() {
     return display;
+}
+
+void CLI::exec(int i) {
+    commands.at(i)->execute();
 }

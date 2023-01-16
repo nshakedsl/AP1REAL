@@ -7,6 +7,7 @@ class CLI {
 public:
     explicit CLI(std::map<int,Command*> commands);
     std::string getDisplay();
+    void exec(int i);
 private:
     std::string genDisplay();
     std::string display;
