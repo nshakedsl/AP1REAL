@@ -8,10 +8,11 @@ private:
     int sock;
     char buffer[MAX_SIZE]{};
     int expectedLen = MAX_SIZE;
-    explicit SocketIO(int sock);
 public:
     std::string read() override;
     void write(const std::string &x) override;
+
+    explicit SocketIO(int sock);
 };
 
 

@@ -16,7 +16,7 @@ private:
     std::map<int,std::string> results;
 public:
     Solver() = default;
-    //todo::implement setTrain and setTest
+    //todo:implement setTrain and setTest
     //sets the training file according to the string that represents them
     void setTrain(const std::string& s);
     //sets the test file according to a string that represents them

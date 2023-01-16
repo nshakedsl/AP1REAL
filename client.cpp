@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <cstring>
 #include "CLI.h"
+#include "SocketIO.h"
 #define MAX_SIZE 4096
 
 int main(int argc, char **arg) {
@@ -44,29 +45,30 @@ int main(int argc, char **arg) {
     if (connect(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error connecting to server");
     }
+    SocketIO socketIo = SocketIO(sock);
     std::map<int,Command*> commands;
     CLI cli = CLI(commands);
     //talking with the server
-    char buffer[MAX_SIZE];
     int choice;
     std::string input;
     while (true) {
-        int expected_data_len = sizeof(buffer);
-        int read_bytes = recv(sock, buffer, expected_data_len, 0);
-        if (read_bytes <= 0) {
-            std::cout << "error" << std::endl;
-            exit(1);
-        } else {
-            std::cout << buffer << std::endl;
-        }
+        std::cout << socketIo.read();
         std::cin >> choice;
         switch (choice) {
             case 1:
 
                 break;
+            //set KNN for the server
             case 2:
                 //get input from user
+                socketIo.write("2");
+                std::cout << socketIo.read();
                 getline(std::cin, input,'\n');
+                socketIo.write(input);
+                input = socketIo.read();
+                if(input != "OK")
+                    std::cout << input;
+                break;
             case 8:
                 //todo: free all
                 close(sock);
