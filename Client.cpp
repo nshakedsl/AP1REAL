@@ -8,8 +8,11 @@ void str_copy(char* dest, const std::string& src){
     }
     dest[length] = '\0';
 }
+
+
+
 //runs the client until
-void Client::run() {
+/*void Client::run() {
     char buffer[4096];
     int read_bytes;
     int expected_data_len = sizeof(buffer);
@@ -72,7 +75,7 @@ Client::Client(const char *ip, int port) {
         exit(1);
     }
     this->cl_socket = sock;
-}
+}*/
 /*int main(int argc, char **arg) {
     //validate enough arguments
     if (argc != 3) {

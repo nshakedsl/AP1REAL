@@ -1,20 +1,20 @@
 #include "ClassifyData.h"
 
-ClassifyData::ClassifyData() {
+ClassifyData::ClassifyData(Solver *solver, DefaultIO *io) : Command(solver, io) {
     description = "classify data";
 }
 
 void ClassifyData::execute() {
-    if (solver.getK() == -1) {
+    if (solver->getK() == -1) {
         //todo: check what the desired behaviour is for undefined parameters
         io->write("uninitialized parameters\n");
         return;
     }
-    if (!solver.beenInitialized()) {
+    if (!solver->beenInitialized()) {
         io->write("data upload please.\n");
         return;
     }
-    solver.calculateResults();
+    solver->calculateResults();
     io->write("complete data classifying\n");
 }
 

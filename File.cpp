@@ -44,7 +44,7 @@ bool File::validDouble(const std::string &s) {
     std::istringstream iss(s);
     float f;
     iss >> std::noskipws >> f;
-    return iss.eof() && !iss.fail(); return false;
+    return iss.eof() && !iss.fail();
 }
 VectorCollection File::getVectors(){
     return vectors;

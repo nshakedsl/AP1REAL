@@ -6,7 +6,7 @@
 class UploadFile : public Command{
 
 public:
-    UploadFile();
+    UploadFile(Solver *solver, DefaultIO *io);
 
     void execute() final;
 };

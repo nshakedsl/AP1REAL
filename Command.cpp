@@ -6,3 +6,8 @@ std::string Command::getDescription(){
 Command::~Command() {
     delete  io;
 }
+
+Command::Command(Solver *solver, DefaultIO *io) {
+    this->solver = solver;
+    this->io = io;
+}

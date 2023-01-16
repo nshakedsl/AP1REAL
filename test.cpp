@@ -3,7 +3,7 @@
 #include "StandardIO.h"
 #include "UploadFile.h"
 int main(){
-    Command *cmd = new UploadFile();
+    Command *cmd = new UploadFile(nullptr, nullptr);
     try  {
         throw 10;
     }

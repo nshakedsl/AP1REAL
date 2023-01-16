@@ -7,13 +7,13 @@
 //this class represents a generic representation of a command
 class Command {
 protected:
-    Command() = default;
+    Command(Solver *solver, DefaultIO *io);
     //used to run the algorithm and pass the variables between commands
-    Solver solver;
+    Solver *solver;
     //represents the description of the current command
     std::string description;
     //used to read and write by the command
-    DefaultIO *io = new StandardIO();
+    DefaultIO *io;
 public:
     //must implement the execution of the command
     virtual void execute() = 0;

@@ -4,7 +4,7 @@
 
 //get you all the results (classifications), numbered
 class DisplayResults : public Command{
-    DisplayResults();
+    DisplayResults(Solver *solver, DefaultIO *io);
 
     void execute() final;
 };

@@ -3,7 +3,7 @@
 #include "Command.h"
 //get you all the results (classifications), numbered
 class DownloadRes : public Command{
-    DownloadRes();
+    DownloadRes(Solver *solver, DefaultIO *io);
 
     void execute() final;
 };

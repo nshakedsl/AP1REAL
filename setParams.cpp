@@ -1,12 +1,12 @@
 #include "setParams.h"
-setParams::setParams() {
+setParams::setParams(Solver *solver, DefaultIO *io) : Command(solver, io) {
     description = "algorithm settings";
 }
 
 void setParams::execute() {
     //send the user the KNN parameters
     io->write("The current KNN parameters are: K = " + std::to_string(solver.getK()) + ", distance metric = "
-              + solver.getMetric()+"\n");
+              + solver->getMetric()+"\n");
     std::string str = io->read();
     //if \n is entered the user doesn't want to change the parameters
     if(str=="\n")

@@ -5,7 +5,7 @@
 
 class setParams : public Command{
 public:
-    setParams();
+    setParams(Solver *solver, DefaultIO *io);
 
     void execute() final;
 };
