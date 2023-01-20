@@ -11,7 +11,7 @@ public:
     //todo: throw exception if an error has occurred
     FileIO() = default;
     //set the path of the fileIO to the given path
-    void setPath(std::string fileName);
+    void setPath(const std::string& fileName);
     //write to the current path
     void write(const std::string &x) override;
     //read the entire file

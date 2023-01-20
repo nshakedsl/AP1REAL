@@ -9,6 +9,6 @@ void FileIO::write(const std::string &x) {
     DefaultIO::write(x);
 }
 
-void FileIO::setPath(std::string fileName) {
+void FileIO::setPath(const std::string& fileName) {
 
 }

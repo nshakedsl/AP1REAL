@@ -8,6 +8,7 @@ SocketIO::SocketIO(int sock) {
 std::string SocketIO::read() {
     recv(sock,buffer,MAX_SIZE,flag);
     //todo: why the warning???
+    //todo: read many
     return std::string(buffer);
 }
 

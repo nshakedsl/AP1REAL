@@ -67,7 +67,7 @@ int main(int argc, char **arg) {
                 std::cin >> input;
                 fileIo.setPath(input);
                 socketIo.write(fileIo.read());
-                std::cout << socketIo.read() << std::endl; 
+                std::cout << socketIo.read() << std::endl;
                 break;
             //set KNN for the server
             case 2:
