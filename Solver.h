@@ -29,6 +29,7 @@ public:
     std::string getMetric();
     //returns the training set
     void calculateResults();
+    static bool isNumberValid(const std::string &string);
     std::map<int,std::string> getResults();
     bool beenInitialized();
 

@@ -7,13 +7,14 @@ bool validDistance(const std::string& s){
     return s == "AUC" || s == "MAN" || s == "CHB" || s == "CAN" || s == "MIN";
 }
 //todo:: add verification that k is smaller than file size
-bool isNumberValid(const std::string& s){
+bool Solver::isNumberValid(const std::string& s){
     for (char const &ch : s) {
         if (std::isdigit(ch) == 0)
             return false;
     }
     return std::stoi(s)>0;
 }
+
 
 void Solver::setTrain(const std::string& s) {
 

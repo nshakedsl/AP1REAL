@@ -3,9 +3,11 @@
 #include "Command.h"
 
 class Exit : public Command{
-    Exit();
 
     void execute() final;
+
+public:
+    Exit();
 };
 
 
