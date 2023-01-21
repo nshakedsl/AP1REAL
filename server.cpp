@@ -4,30 +4,14 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <cstring>
+#include <unistd.h>
 #include "thread"
 
 void serve(int sock) {
     DefaultIO *io = new SocketIO(sock);
     CLI cli = CLI(io);
-    int choice = -1;
-    std::string input;
-    //read input until user ends connection with choice = 8
-    while (choice != 8) {
-        //send to the user all the available commands and wait for his choice
-        io->write(cli.getDisplay());
-        input = io->read();
-        //check if number
-        //call for function that checks if string is number
-        choice = -1;
-        if (Solver::isNumberValid(input)) {
-            choice = std::stoi(input);
-            if ((choice < 6 && choice > 0) || choice == 8){
-                   cli.exec(choice);
-            }
-        }
-        if(choice == -1)
-            io->write("illegal value");
-    }
+    cli.start();
+    close(sock);
 }
 
 int main(int argc, char **arg) {
@@ -84,6 +68,5 @@ int main(int argc, char **arg) {
         }
         //serves said socket
         std::thread thread(serve, client_sock);
-        //serve(client_sock);
     }
 }

@@ -19,7 +19,7 @@ public:
     virtual void execute() = 0;
     //get the description of the current command
     std::string getDescription();
-    ~Command();
+    virtual ~Command();
 };
 
 

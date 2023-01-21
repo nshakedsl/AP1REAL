@@ -9,16 +9,21 @@
 #include "SocketIO.h"
 class CLI {
 public:
+    void start();
     explicit CLI(std::map<int,Command*> commands);
     CLI();
     explicit CLI(DefaultIO* io);
     std::string getDisplay();
     void exec(int i);
+
+//todo: destructor kill commands seems problematic
+~CLI();
+
 private:
     std::string genDisplay();
     std::string display;
     std::map<int,Command*> commands;
-    //todo: destructor kill commands
+    DefaultIO* io;
 };
 
 
