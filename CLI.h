@@ -7,6 +7,11 @@
 #include "UploadFile.h"
 #include "Solver.h"
 #include "SocketIO.h"
+#include "Exit.h"
+#include "setParams.h"
+#include "ClassifyData.h"
+#include "DownloadRes.h"
+#include "DisplayResults.h"
 class CLI {
 public:
     void start();

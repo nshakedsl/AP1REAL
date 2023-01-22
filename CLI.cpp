@@ -1,5 +1,6 @@
 #include "CLI.h"
-#include "Exit.h"
+
+
 
 std::string CLI::genDisplay() {
     std::map<int,Command>::iterator it;
@@ -44,10 +45,10 @@ CLI::CLI(DefaultIO *io) {
     this->io = io;
     auto* solver = new Solver();
     Command* command1 = new UploadFile(solver,io);
-    Command* command2 = new UploadFile(solver,io);
-    Command* command3 = new UploadFile(solver,io);
-    Command* command4 = new UploadFile(solver,io);
-    Command* command5 = new UploadFile(solver,io);
+    Command* command2 = new setParams(solver,io);
+    Command* command3 = new ClassifyData(solver,io);
+    Command* command4 = new DisplayResults(solver,io);
+    Command* command5 = new DownloadRes(solver,io);
     Command* command8 = new Exit(nullptr, nullptr);
     Commands.insert({1,command1});
     Commands.insert({2,command2});

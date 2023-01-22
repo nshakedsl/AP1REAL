@@ -17,14 +17,14 @@ void serve(int sock) {
 
 int main(int argc, char **arg) {
     //validate enough arguments
-    if (argc != 3) {
+    if (argc != 2) {
         perror("illegal arguments");
         exit(1);
     }
     //validate the port
     int server_port;
     try {
-        server_port = std::stoi(arg[2]);
+        server_port = std::stoi(arg[1]);
         if (server_port > 65535 || server_port < 1) {
             perror("illegal port");
             exit(1);
@@ -35,8 +35,6 @@ int main(int argc, char **arg) {
         std::cout << "illegal port" << std::endl;
         exit(1);
     }
-    //CLI cli = CLI();
-    //creates the server socket
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
         perror("error creating socket");

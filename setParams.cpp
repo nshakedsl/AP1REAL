@@ -11,7 +11,7 @@ void setParams::execute() {
     //if \n is entered the user doesn't want to change the parameters
     if(str=="\n")
         return;
-    try {
+    try {//try to set the parameters
         solver->setParams(str);
     } catch (int i){
         if(i==1) {

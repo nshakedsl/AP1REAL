@@ -3,9 +3,11 @@
 #include "Command.h"
 //get you all the results (classifications), numbered
 class DownloadRes : public Command{
-    DownloadRes(Solver *solver, DefaultIO *io);
 
     void execute() final;
+
+public:
+    DownloadRes(Solver *solver, DefaultIO *io);
 };
 
 #endif //AP1REAL_DOWNLOADRES_H
