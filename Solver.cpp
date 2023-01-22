@@ -70,7 +70,7 @@ void Solver::setTest(const std::string& s) {
             }
         }
         // finish reading vector push it to test
-        test.push_back(v)
+        test.push_back(v);
     }
 }
 
