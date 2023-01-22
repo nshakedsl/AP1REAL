@@ -28,7 +28,7 @@ void Solver::setTrain(const std::string& s) {
     std::istringstream stream(s);
     std::string line;
 
-    while (std::getline(myFile, line)) {
+    while (std::getline(stream, line)) {
         std::istringstream s(line);
         std::string field;
         std::vector<double> v;
@@ -53,7 +53,7 @@ void Solver::setTest(const std::string& s) {
     std::istringstream stream(s);
     std::string line;
 
-    while (std::getline(myFile, line)) {
+    while (std::getline(stream, line)) {
         std::istringstream s(line);
         std::string field;
         std::vector<double> v;
