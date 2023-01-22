@@ -13,6 +13,7 @@ public:
 
     //write to said IO stream
     virtual void write(const std::string &x) = 0;
+    virtual ~DefaultIO() = 0;
 };
 
 
