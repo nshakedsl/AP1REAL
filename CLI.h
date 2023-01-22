@@ -15,7 +15,6 @@
 class CLI {
 public:
     void start();
-    CLI();
     explicit CLI(DefaultIO* io);
     std::string getDisplay();
     void exec(int i);

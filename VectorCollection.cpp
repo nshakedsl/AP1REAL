@@ -10,7 +10,7 @@ void VectorCollection::pushVector(const std::vector<double> &vec) {
     vectorList.push_back(vec);
 }
 
-std::vector <vector<double>>
+std::vector <std::vector<double>>
 VectorCollection::getDistancesK(const std::vector<double> &vector, const std::string &format, int k) {
     //initializes a sorted multimap
     std::multimap<double, std::vector<double>> sortedVecs = getDistances(vector, format);
@@ -56,11 +56,11 @@ VectorCollection::getDistances(const std::vector<double> &vector, const std::str
                 dis = distance.minkowskiDistance();
                 //illegal type of distance given
             else {
-                std::cout << "error" << endl;
+                std::cout << "error" << std::endl;
                 exit(1);
             }
             //inserts the distance of v from the current vector
-            vectors.insert(pair < double, std::vector < double >> (dis, v));
+            vectors.insert(std::pair < double, std::vector < double >> (dis, v));
         } catch (...) {
             return vectors;
         }

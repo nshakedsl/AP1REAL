@@ -1,7 +1,6 @@
 #ifndef AP1REAL_COMMAND_H
 #define AP1REAL_COMMAND_H
-
-#include "StandardIO.h"
+#include "DefaultIO.h"
 #include <string>
 #include "Solver.h"
 //this class represents a generic representation of a command
