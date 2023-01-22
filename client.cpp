@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "thread"
 #include <cstring>
+#include <mutex>
 #include "SocketIO.h"
 #include "FileIO.h"
 
@@ -14,13 +15,16 @@
  * print invalid input if the download failed
  */
 void downLoad(const std::string& path,SocketIO socketIo){
+    std::mutex m;
     FileIO fileIo = FileIO();
     fileIo.setPath(path);
+    m.lock();
     try {
         fileIo.write(socketIo.read());
     } catch (...){
         std::cout << "invalid input" << std::endl;
     }
+    m.unlock();
 }
 
 int main(int argc, char **arg) {
