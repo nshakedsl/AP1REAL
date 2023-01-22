@@ -17,10 +17,13 @@ private:
 public:
     Solver() = default;
     //todo:implement setTrain and setTest
+
     //sets the training file according to the string that represents them
     void setTrain(const std::string& s);
     //sets the test file according to a string that represents them
     void setTest(const std::string& s);
+
+
     //sets the KNN params given a string that represents them
     void setParams(std::string s);
     //returns the desired K
