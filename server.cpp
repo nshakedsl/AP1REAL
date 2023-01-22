@@ -64,7 +64,6 @@ int main(int argc, char **arg) {
         int client_sock = accept(sock, (struct sockaddr *) &client_sin, &addr_len);
         if (client_sock < 0) {
             perror("error accepting client");
-            exit(1);
         }
         //serves said socket
         std::thread thread(serve, client_sock);

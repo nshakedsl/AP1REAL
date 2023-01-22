@@ -1,11 +1,6 @@
 #include "CLI.h"
 #include "Exit.h"
 
-CLI::CLI(std::map<int, Command*> commands) {
-    this->commands = std::move(commands);
-    this->display = this->genDisplay();
-}
-
 std::string CLI::genDisplay() {
     std::map<int,Command>::iterator it;
     std::string Display;
@@ -41,6 +36,7 @@ CLI::CLI() {
     Commands.insert({5,command5});
     Commands.insert({8,command8});
     this->commands = Commands;
+    this->display = this->genDisplay();
 }
 
 CLI::CLI(DefaultIO *io) {
@@ -60,6 +56,7 @@ CLI::CLI(DefaultIO *io) {
     Commands.insert({5,command5});
     Commands.insert({8,command8});
     this->commands = Commands;
+    this->display = this->genDisplay();
 }
 
 void CLI::start() {
@@ -73,14 +70,19 @@ void CLI::start() {
         //check if number
         //call for function that checks if string is number
         choice = -1;
-        if (Solver::isNumberValid(input)) {
-            choice = std::stoi(input);
-            if ((choice < 6 && choice > 0) || choice == 8){
-                this->exec(choice);
+        try {
+            if (Solver::isNumberValid(input)) {
+                choice = std::stoi(input);
+                if ((choice < 6 && choice > 0) || choice == 8){
+                    this->exec(choice);
+                }
             }
+            if(choice == -1)
+                io->write("invalid input");
+        } catch (...){
+            io->write("invalid input");
         }
-        if(choice == -1)
-            io->write("illegal value");
+
     }
 }
 //todo: find if problematic

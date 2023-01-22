@@ -5,7 +5,6 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <cstring>
-#include "CLI.h"
 #include "SocketIO.h"
 #include "FileIO.h"
 #define MAX_SIZE 4096
@@ -47,8 +46,6 @@ int main(int argc, char **arg) {
         perror("error connecting to server");
     }
     SocketIO socketIo = SocketIO(sock);
-    std::map<int,Command*> commands;
-    CLI cli = CLI(commands);
     //talking with the server
     int choice;
     std::string input;
@@ -84,7 +81,7 @@ int main(int argc, char **arg) {
                 std::cout << socketIo.read();
                 break;
             case 5:
-
+                //todo: implement me
                 break;
             case 8:
                 //todo: free all

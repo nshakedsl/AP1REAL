@@ -10,7 +10,6 @@
 class CLI {
 public:
     void start();
-    explicit CLI(std::map<int,Command*> commands);
     CLI();
     explicit CLI(DefaultIO* io);
     std::string getDisplay();
