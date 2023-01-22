@@ -6,17 +6,18 @@ SocketIO::SocketIO(int sock) {
 }
 
 std::string SocketIO::read() {
-    recv(sock,buffer,MAX_SIZE,flag);
-    //todo: why the warning???
-    //todo: read many
-    return std::string(buffer);
+    ssize_t bytes = recv(sock,buffer,MAX_SIZE,flag);
+    if (bytes == 0) {
+        return "";
+    }
+    if(bytes<0){
+        throw std::exception();
+    }
+    return {buffer};
 }
 
 void SocketIO::write(const std::string &x) {
-    unsigned long length = x.length();
-    for (int i = 0; i < length; ++i) {
-        buffer[i] = x[i];
-    }
-    buffer[length] = '\0';
-    send(sock,buffer,sizeof (buffer)+1,0);
+    ssize_t bytes = send(sock,x.c_str(),x.length(),0);
+    if(bytes < 0)
+        throw std::exception();
 }
