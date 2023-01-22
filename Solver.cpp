@@ -1,4 +1,6 @@
 #include <algorithm>
+#include <ios>
+#include <sstream>
 #include "Solver.h"
 std::string trim(const std::string &s){
     return s.substr(s.find_first_not_of(' '),s.find_last_not_of(' ') - s.find_first_not_of(' '));
