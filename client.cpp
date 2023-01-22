@@ -79,7 +79,7 @@ int main(int argc, char **arg) {
         switch (choice) {
             //read the given files and write them to the server
             case 1:
-                std::cout << socketIo.read() << std::endl;
+                std::cout << socketIo.read();
                 std::cin >> input;
                 fileIo.setPath(input);
                 try {
