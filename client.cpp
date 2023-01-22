@@ -4,10 +4,20 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include "thread"
 #include <cstring>
 #include "SocketIO.h"
 #include "FileIO.h"
 #define MAX_SIZE 4096
+
+bool validPath(const std::string& path){
+    return true;
+}
+void downLoad(const std::string& path,SocketIO socketIo){
+    FileIO fileIo = FileIO();
+    fileIo.setPath(path);
+    fileIo.write(socketIo.read());
+}
 
 int main(int argc, char **arg) {
     //initialization routine
@@ -81,6 +91,12 @@ int main(int argc, char **arg) {
                 std::cout << socketIo.read();
                 break;
             case 5:
+                std::cin >> input;
+                if(validPath(input)){
+                    std::thread thread(downLoad,input,socketIo);
+                } else {
+                    std::cout << "invalid input" << std::endl;
+                }
                 //todo: implement me
                 break;
             case 8:
