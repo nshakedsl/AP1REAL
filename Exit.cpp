@@ -1,6 +1,6 @@
 #include "Exit.h"
 
-Exit::Exit() {
+Exit::Exit(Solver *solver, DefaultIO *io) : Command(solver, io) {
     description = "exit";
 }
 

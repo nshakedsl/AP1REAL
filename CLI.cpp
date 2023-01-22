@@ -28,7 +28,7 @@ CLI::CLI() {
     Command* command3 = new UploadFile(solver, pIo);
     Command* command4 = new UploadFile(solver, pIo);
     Command* command5 = new UploadFile(solver, pIo);
-    Command* command8 = new Exit();
+    Command* command8 = new Exit(nullptr, nullptr);
     Commands.insert({1,command1});
     Commands.insert({2,command2});
     Commands.insert({3,command3});
@@ -48,7 +48,7 @@ CLI::CLI(DefaultIO *io) {
     Command* command3 = new UploadFile(solver,io);
     Command* command4 = new UploadFile(solver,io);
     Command* command5 = new UploadFile(solver,io);
-    Command* command8 = new Exit();
+    Command* command8 = new Exit(nullptr, nullptr);
     Commands.insert({1,command1});
     Commands.insert({2,command2});
     Commands.insert({3,command3});

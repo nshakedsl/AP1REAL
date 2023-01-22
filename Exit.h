@@ -7,7 +7,7 @@ class Exit : public Command{
     void execute() final;
 
 public:
-    Exit();
+    Exit(Solver *solver, DefaultIO *io);
 };
 
 
