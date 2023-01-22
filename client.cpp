@@ -77,8 +77,8 @@ int main(int argc, char **arg) {
             case 1:
                 std::cout << socketIo.read() << std::endl;
                 std::cin >> input;
+                fileIo.setPath(input);
                 try {
-                    fileIo.setPath(input);
                     socketIo.write(fileIo.read());
                     std::cout << socketIo.read() << std::endl;
                 } catch (...){
@@ -86,8 +86,12 @@ int main(int argc, char **arg) {
                 }
                 std::cin >> input;
                 fileIo.setPath(input);
-                socketIo.write(fileIo.read());
-                std::cout << socketIo.read() << std::endl;
+                try{
+                    socketIo.write(fileIo.read());
+                    std::cout << socketIo.read() << std::endl;
+                } catch (...){
+                    std::cout << "invalid input" << std::endl;
+                }
                 break;
             //set KNN for the server
             case 2:
