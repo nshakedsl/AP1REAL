@@ -16,55 +16,62 @@ void serve(int sock) {
 }
 
 int main(int argc, char **arg) {
-    //validate enough arguments
-    if (argc != 2) {
-        perror("illegal arguments");
-        exit(1);
-    }
-    //validate the port
-    int server_port;
+    //TODO: remove the try!!!
     try {
-        server_port = std::stoi(arg[1]);
-        if (server_port > 65535 || server_port < 1) {
-            perror("illegal port");
+        //validate enough arguments
+        if (argc != 2) {
+            perror("illegal arguments");
             exit(1);
         }
-    }
-        //exit for invalid port
-    catch (...) {
-        std::cout << "illegal port" << std::endl;
-        exit(1);
-    }
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock < 0) {
-        perror("error creating socket");
-        exit(1);
-    }
-    struct sockaddr_in sin;
-    memset(&sin, 0, sizeof(sin));
-    sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = INADDR_ANY;
-    sin.sin_port = htons(server_port);
-    //binds the socket to the given port
-    if (bind(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
-        perror("error binding socket");
-        exit(1);
-    }
-    //runs forever, continuously serves clients one after another
-    while (true) {
-        //tries to accept a socket
-        if (listen(sock, 5) < 0) {
-            perror("error listening to a socket");
+        //validate the port
+        int server_port;
+        try {
+            server_port = std::stoi(arg[1]);
+            if (server_port > 65535 || server_port < 1) {
+                perror("illegal port");
+                exit(1);
+            }
+        }
+            //exit for invalid port
+        catch (...) {
+            std::cout << "illegal port" << std::endl;
             exit(1);
         }
-        struct sockaddr_in client_sin;
-        unsigned int addr_len = sizeof(client_sin);
-        //accepts a socket
-        int client_sock = accept(sock, (struct sockaddr *) &client_sin, &addr_len);
-        if (client_sock < 0) {
-            perror("error accepting client");
+        int sock = socket(AF_INET, SOCK_STREAM, 0);
+        if (sock < 0) {
+            perror("error creating socket");
+            exit(1);
         }
-        //serves said socket
-        std::thread thread(serve, client_sock);
+        struct sockaddr_in sin;
+        memset(&sin, 0, sizeof(sin));
+        sin.sin_family = AF_INET;
+        sin.sin_addr.s_addr = INADDR_ANY;
+        sin.sin_port = htons(server_port);
+        //binds the socket to the given port
+        if (bind(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+            perror("error binding socket");
+            exit(1);
+        }
+        //runs forever, continuously serves clients one after another
+        while (true) {
+            //tries to accept a socket
+            if (listen(sock, 5) < 0) {
+                perror("error listening to a socket");
+                exit(1);
+            }
+            struct sockaddr_in client_sin;
+            unsigned int addr_len = sizeof(client_sin);
+            //accepts a socket
+            int client_sock = accept(sock, (struct sockaddr *) &client_sin, &addr_len);
+            if (client_sock < 0) {
+                perror("error accepting client");
+            }
+            //serves said socket
+            std::thread thread(serve, client_sock);
+            thread.detach();
+        }
+    } catch (std::exception &e) {
+        // code to handle the exception
+        std::cout << "An exception occurred: " << e.what() << std::endl;
     }
 }

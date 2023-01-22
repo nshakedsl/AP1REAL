@@ -3,6 +3,7 @@
 
 #include "Command.h"
 #include "map"
+#include <iostream>
 #include <utility>
 #include "UploadFile.h"
 #include "Solver.h"

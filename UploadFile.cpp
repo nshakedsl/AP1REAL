@@ -10,10 +10,10 @@ void UploadFile::execute() {
     if(input=="invalid input")
         return;
     solver->setTrain(input);
-    io->write("Upload complete.\nPlease upload your local test CSV file.\n");
+    io->write("Upload complete.\nPlease upload your local test CSV file.");
     input = io->read();
     if(input=="invalid input")
         return;
     solver->setTest(input);
-    io->write("Upload complete.\n");
+    io->write("Upload complete.");
 }

@@ -118,6 +118,7 @@ int main(int argc, char **arg) {
                 std::cin >> input;
                 {
                     std::thread thread(downLoad,input,socketIo);
+                    thread.detach();
                 }
                 break;
             case 8:

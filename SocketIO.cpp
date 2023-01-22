@@ -16,7 +16,7 @@ std::string SocketIO::read() {
 }
 
 void SocketIO::write(const std::string &x) {
-    ssize_t bytes = send(sock,x.c_str(),x.length(),0);
+    ssize_t bytes = send(sock,x.c_str(),x.length()+1,0);
     if(bytes < 0)
         throw std::exception();
 }
