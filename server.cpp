@@ -11,6 +11,7 @@ void serve(int sock) {
     DefaultIO *io = new SocketIO(sock);
     CLI cli = CLI(io);
     cli.start();
+    delete io;
     close(sock);
 }
 

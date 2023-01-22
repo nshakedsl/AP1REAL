@@ -87,6 +87,7 @@ int main(int argc, char **arg) {
                     std::cout << socketIo.read() << std::endl;
                 } catch (...){
                     std::cout << "invalid input" << std::endl;
+                    break;
                 }
                 std::cin >> input;
                 fileIo.setPath(input);
