@@ -9,18 +9,22 @@
 #include "SocketIO.h"
 #include "FileIO.h"
 
-bool validPath(const std::string& path){
-    return true;
-}
+/*
+ * attempt to write to the file in the given destination
+ * print invalid input if the download failed
+ */
 void downLoad(const std::string& path,SocketIO socketIo){
     FileIO fileIo = FileIO();
     fileIo.setPath(path);
-    fileIo.write(socketIo.read());
+    try {
+        fileIo.write(socketIo.read());
+    } catch (...){
+        std::cout << "invalid input" << std::endl;
+    }
 }
 
 int main(int argc, char **arg) {
     //initialization routine
-
     //validate enough arguments
     if (argc != 3) {
         std::cout << "illegal arguments" << std::endl;
@@ -40,6 +44,7 @@ int main(int argc, char **arg) {
         std::cout << "illegal port" << std::endl;
         exit(1);
     }
+    //initialize the connection
     char* ip_address = arg[1];
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
@@ -51,25 +56,34 @@ int main(int argc, char **arg) {
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = inet_addr(ip_address);
     sin.sin_port = htons(port);
+    //attempt to connect to the server
     if (connect(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
         perror("error connecting to server");
+        exit(1);
     }
     SocketIO socketIo = SocketIO(sock);
     //talking with the server
     int choice;
     std::string input;
     FileIO fileIo = FileIO();
+    //run until the user puts 8, signifying the end of the connection to the client
     while (true) {
         std::cout << socketIo.read();
         std::cin >> choice;
+        //send choice to the user
         socketIo.write(std::to_string(choice));
         switch (choice) {
+            //read the given files and write them to the server
             case 1:
                 std::cout << socketIo.read() << std::endl;
                 std::cin >> input;
-                fileIo.setPath(input);
-                socketIo.write(fileIo.read());
-                std::cout << socketIo.read() << std::endl;
+                try {
+                    fileIo.setPath(input);
+                    socketIo.write(fileIo.read());
+                    std::cout << socketIo.read() << std::endl;
+                } catch (...){
+                    std::cout << "invalid input" << std::endl;
+                }
                 std::cin >> input;
                 fileIo.setPath(input);
                 socketIo.write(fileIo.read());
@@ -91,12 +105,9 @@ int main(int argc, char **arg) {
                 break;
             case 5:
                 std::cin >> input;
-                if(validPath(input)){
+                {
                     std::thread thread(downLoad,input,socketIo);
-                } else {
-                    std::cout << "invalid input" << std::endl;
                 }
-                //todo: implement me
                 break;
             case 8:
                 //todo: free all

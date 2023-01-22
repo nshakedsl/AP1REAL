@@ -3,6 +3,7 @@
 
 #include "DefaultIO.h"
 #include <fstream>
+#include <stdexcept>
 
 class FileIO : public DefaultIO {
     std::string fileName;
@@ -23,6 +24,5 @@ public:
     // If the function can't open the file it throws exception
     std::string read() override;
 };
-
 
 #endif //AP1REAL_FILEIO_H
