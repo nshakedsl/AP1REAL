@@ -76,8 +76,10 @@ void CLI::start() {
                 if ((choice < 6 && choice > 0) || choice == 8){
                     this->exec(choice);
                 }
+                else
+                    io->write("invalid input");
             }
-            if(choice == -1)
+            else
                 io->write("invalid input");
         } catch (...){
             io->write("invalid input");

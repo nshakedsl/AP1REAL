@@ -86,6 +86,7 @@ int main(int argc, char **arg) {
                     socketIo.write(fileIo.read());
                     std::cout << socketIo.read() << std::endl;
                 } catch (...){
+                    socketIo.write("invalid input");
                     std::cout << "invalid input" << std::endl;
                     break;
                 }
@@ -95,6 +96,7 @@ int main(int argc, char **arg) {
                     socketIo.write(fileIo.read());
                     std::cout << socketIo.read() << std::endl;
                 } catch (...){
+                    socketIo.write("invalid input");
                     std::cout << "invalid input" << std::endl;
                 }
                 break;
