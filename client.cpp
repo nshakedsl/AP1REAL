@@ -8,7 +8,6 @@
 #include <cstring>
 #include "SocketIO.h"
 #include "FileIO.h"
-#define MAX_SIZE 4096
 
 bool validPath(const std::string& path){
     return true;
@@ -108,12 +107,3 @@ int main(int argc, char **arg) {
         }
     }
 }
-/*
- *         char data_addr[] = "Im a message";
-        int data_len = strlen(data_addr);
-        int sent_bytes = send(sock, data_addr, data_len, 0);
-        if (sent_bytes < 0) {
-            //todo: set error message
-            std::perror("error message");
-        }
- */

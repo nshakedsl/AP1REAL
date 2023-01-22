@@ -1,6 +1,5 @@
 #include <sys/socket.h>
 #include "SocketIO.h"
-#define MAX_SIZE 4096
 SocketIO::SocketIO(int sock) {
     this->sock = sock;
 }

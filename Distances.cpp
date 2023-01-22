@@ -1,5 +1,6 @@
+
 #include "Distances.h"
-#define P 3
+#define P 2
 #include <cmath>
 
 using namespace std;
