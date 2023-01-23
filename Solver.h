@@ -34,6 +34,7 @@ public:
     std::map<int,std::string> getResults();
     bool beenInitialized();
 
+    bool isNumberK(const std::string &s);
 };
 
 

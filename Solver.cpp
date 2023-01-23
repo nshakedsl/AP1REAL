@@ -16,12 +16,19 @@ bool Solver::isNumberValid(const std::string& s){
     }
     return std::stoi(s)>0;
 }
+bool Solver::isNumberK(const std::string& s){
+    for (char const &ch : s) {
+        if (std::isdigit(ch) == 0)
+            return false;
+    }
+    return std::stoi(s)>0 && std::stoi(s)<=train.size();
+}
 
 bool validDouble(const std::string &s) {
     std::istringstream iss(s);
     float f;
     iss >> std::noskipws >> f;
-    return iss.eof() && !iss.fail(); return false;
+    return iss.eof() && !iss.fail();
 }
 
 void Solver::setTrain(const std::string& s) {
@@ -85,11 +92,11 @@ void Solver::setParams(std::string s) {
     int i = s.find_first_of(' ');
     std::string kStr = s.substr(0,i);
     std::string distance = s.substr(i+1,s.length()-i);
-    if(!validDistance(distance) && !isNumberValid(kStr))
+    if(!validDistance(distance) && !isNumberK(kStr))
         throw 1;
     if(!validDistance(distance))
         throw 2;
-    if(!isNumberValid(kStr))
+    if(!isNumberK(kStr))
         throw 3;
     metric = distance;
     k = std::stoi(kStr);
