@@ -77,6 +77,7 @@ int main(int argc, char **arg) {
     FileIO fileIo = FileIO();
     //run until the user puts 8, signifying the end of the connection to the client
     while (true) {
+        std::cout << "arrived at choice asking" << std::endl;
         std::cout << socketIo.read();
         std::cin >> choice;
         //send choice to the user

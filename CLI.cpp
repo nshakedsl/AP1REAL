@@ -1,7 +1,5 @@
 #include "CLI.h"
 
-
-
 std::string CLI::genDisplay() {
     std::map<int,Command>::iterator it;
     std::string Display;
@@ -18,8 +16,6 @@ std::string CLI::getDisplay() {
 void CLI::exec(int i) {
     commands.at(i)->execute();
 }
-
-
 
 CLI::CLI(DefaultIO *io) {
     std::map<int, Command*> Commands;
@@ -48,6 +44,8 @@ void CLI::start() {
     while (choice != 8) {
         //send to the user all the available commands and wait for his choice
         io->write(this->getDisplay());
+        std::cout << "written this:" << std::endl;
+        std::cout << this->getDisplay() << std::endl;
         input = io->read();
         //check if number
         //call for function that checks if string is number
