@@ -4,7 +4,7 @@ std::string Command::getDescription(){
 }
 
 Command::~Command() {
-    delete  io;
+    //delete  io;
 }
 
 Command::Command(Solver *solver, DefaultIO *io) {
