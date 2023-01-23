@@ -60,8 +60,8 @@ void CLI::start() {
             else
                 io->write("invalid input 1\n");
         } catch (std::exception &exception){
-            io->write("invalid input\n");
             std::cout << exception.what();
+            io->write("invalid input132\n");
         }
 
     }

@@ -9,9 +9,9 @@ void setParams::execute() {
     io->write("The current KNN parameters are: K = " + std::to_string(solver->getK()) + ", distance metric = "
               + solver->getMetric()+"\n");
     std::string str = io->read();
-    std::cout <<"the input is: "<< str << std::endl;
+    std::cout <<"the input is: "<< str <<"."<< std::endl;
     //if \n is entered the user doesn't want to change the parameters
-    if(str=="\n"){
+    if(str.empty()){
         return;
     }
     try {//try to set the parameters

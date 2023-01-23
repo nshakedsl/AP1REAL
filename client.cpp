@@ -79,14 +79,22 @@ int main(int argc, char **arg) {
     //run until the user puts 8, signifying the end of the connection to the client
     while (true) {
         std::cout << options;
-        std::cin >> choice;
+        getline(std::cin, input);
+        //std::cin >> choice;
         //send choice to the user
-        socketIo.write(std::to_string(choice));
+        socketIo.write(input);
+        try {
+            choice = std::stoi(input);
+        } catch (...){
+            std::cout << "invalid input" << std::endl;
+            continue;
+        }
         switch (choice) {
             //read the given files and write them to the server
             case 1:
                 std::cout << socketIo.read();
-                std::cin >> input;
+                getline(std::cin, input);
+                //std::cin >> input;
                 fileIo.setPath(input);
                 try {
                     socketIo.write(fileIo.read());
@@ -110,7 +118,9 @@ int main(int argc, char **arg) {
             case 2:
                 //get input from user
                 std::cout << socketIo.read();
-                getline(std::cin, input,'\n');
+                getline(std::cin, input);
+                std::cout << "the input is :" <<input<<"."<<std::endl;
+                std::cout << "arrived" << std::endl;
                 socketIo.write(input);
                 input = socketIo.read();
                 if(input != "OK")
