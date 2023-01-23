@@ -55,12 +55,13 @@ void CLI::start() {
                     this->exec(choice);
                 }
                 else
-                    io->write("invalid input");
+                    io->write("invalid input 2\n");
             }
             else
-                io->write("invalid input");
-        } catch (...){
-            io->write("invalid input");
+                io->write("invalid input 1\n");
+        } catch (std::exception &exception){
+            io->write("invalid input\n");
+            std::cout << exception.what();
         }
 
     }
