@@ -2,6 +2,7 @@
 #define AP1REAL_SOCKETIO_H
 #include "DefaultIO.h"
 #define MAX_SIZE 8182
+#include <cstring>
 class SocketIO : public DefaultIO{
 private:
     int flag = 0;

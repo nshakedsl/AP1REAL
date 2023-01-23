@@ -12,11 +12,27 @@ std::string SocketIO::read() {
     if(bytes<0){
         throw std::exception();
     }
-    return {buffer};
+    int len = strlen(buffer);
+    if (len < MAX_SIZE || buffer[MAX_SIZE-1] == '\0')
+        return {buffer};
+    else {
+        return buffer + this->read();
+    }
 }
 
 void SocketIO::write(const std::string &x) {
-    ssize_t bytes = send(sock,x.c_str(),x.length()+1,0);
-    if(bytes < 0)
-        throw std::exception();
+    size_t len = x.length();
+    if(len<MAX_SIZE){
+        ssize_t bytes = send(sock,x.c_str(),x.length()+1,0);
+        if(bytes < 0)
+            throw std::exception();
+    } else {
+        int current = 0;
+        while (current<len){
+            ssize_t bytes = send(sock,x.c_str(),x.length()+1,0);
+            if(bytes < 0)
+                throw std::exception();
+            current+=MAX_SIZE;
+        }
+    }
 }
