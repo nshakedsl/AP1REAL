@@ -18,9 +18,14 @@ void downLoad(const std::string& path,SocketIO socketIo){
     std::mutex m;
     FileIO fileIo = FileIO();
     fileIo.setPath(path);
+    std::string input;
     m.lock();
     try {
-        fileIo.write(socketIo.read());
+        input = socketIo.read();
+        if(input != "please classify the data" && input != "please upload data")
+            fileIo.write(input);
+        else
+            std::cout << input << std::endl;
     } catch (...){
         std::cout << "invalid input" << std::endl;
     }

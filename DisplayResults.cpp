@@ -14,7 +14,6 @@ void DisplayResults::execute() {
         io->write("please classify the data");
         return;
     }
-    //todo: no results
     for (int i = 0; i < solver->getResults().size(); ++i) {
         res += std::to_string(i) + '\t' + solver->getResults().at(i) + "\n";
     }
