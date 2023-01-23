@@ -41,11 +41,9 @@ void CLI::start() {
     int choice = -1;
     std::string input;
     //read input until user ends connection with choice = 8
+    io->write(this->getDisplay());
     while (choice != 8) {
         //send to the user all the available commands and wait for his choice
-        io->write(this->getDisplay());
-        std::cout << "written this:" << std::endl;
-        std::cout << this->getDisplay() << std::endl;
         input = io->read();
         //check if number
         //call for function that checks if string is number

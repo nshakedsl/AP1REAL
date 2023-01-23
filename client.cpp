@@ -75,10 +75,10 @@ int main(int argc, char **arg) {
     int choice;
     std::string input;
     FileIO fileIo = FileIO();
+    std::string options = socketIo.read();
     //run until the user puts 8, signifying the end of the connection to the client
     while (true) {
-        std::cout << "arrived at choice asking" << std::endl;
-        std::cout << socketIo.read();
+        std::cout << options;
         std::cin >> choice;
         //send choice to the user
         socketIo.write(std::to_string(choice));
