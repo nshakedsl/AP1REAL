@@ -16,6 +16,7 @@ void setParams::execute() {
     }
     try {//try to set the parameters
         solver->setParams(str);
+        io->write("OK");
     } catch (int i){
         if(i==1) {
             io->write("invalid value for K\ninvalid value for metric\n");
