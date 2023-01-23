@@ -119,8 +119,6 @@ int main(int argc, char **arg) {
                 //get input from user
                 std::cout << socketIo.read();
                 getline(std::cin, input);
-                std::cout << "the input is :" <<input<<"."<<std::endl;
-                std::cout << "arrived" << std::endl;
                 socketIo.write(input);
                 input = socketIo.read();
                 if(input != "OK")

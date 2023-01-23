@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <ios>
 #include <sstream>
+#include <iostream>
 #include "Solver.h"
 std::string trim(const std::string &s){
     return s.substr(s.find_first_not_of(' '),s.find_last_not_of(' ') - s.find_first_not_of(' '));
@@ -84,22 +85,27 @@ void Solver::setTest(const std::string& s) {
 
 
 void Solver::setParams(std::string s) {
-    s = trim(s);
+    std::size_t first = s.find_first_not_of(' ');
+    std::size_t last = s.find_last_not_of(' ');
+    s = s.substr(first, (last - first + 1));
+    //s = trim(s);
     int count = std::count(s.begin(), s.end(), ' ');
     if(count!=1){
         throw 1;
     }
     int i = s.find_first_of(' ');
+    int j = s.find_last_of(' ');
     std::string kStr = s.substr(0,i);
-    std::string distance = s.substr(i+1,s.length()-i);
-    if(!validDistance(distance) && !isNumberK(kStr))
+    std::string distance = s.substr(j+1,s.length()-j);
+    if(!validDistance(distance) && !isNumberValid(kStr))
         throw 1;
     if(!validDistance(distance))
         throw 2;
-    if(!isNumberK(kStr))
+    if(!isNumberValid(kStr))
         throw 3;
     metric = distance;
     k = std::stoi(kStr);
+    std::cout << "left";
 }
 
 int Solver::getK() const {

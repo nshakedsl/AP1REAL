@@ -11,7 +11,7 @@ class Solver {
 private:
     std::map<std::vector<double>,std::string> train;
     std::vector<std::vector<double>> test;
-    int k = 1;
+    int k = 5;
     std::string metric = "AUC";
     std::map<int,std::string> results;
 public:
