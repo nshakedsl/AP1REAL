@@ -5,11 +5,6 @@ ClassifyData::ClassifyData(Solver *solver, DefaultIO *io) : Command(solver, io) 
 }
 
 void ClassifyData::execute() {
-    if (solver->getK() == -1) {
-        //todo: check what the desired behaviour is for undefined parameters
-        io->write("uninitialized parameters\n");
-        return;
-    }
     if (!solver->beenInitialized()) {
         io->write("data upload please.\n");
         return;

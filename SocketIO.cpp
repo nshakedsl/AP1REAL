@@ -12,7 +12,7 @@ std::string SocketIO::read() {
     if(bytes<0){
         throw std::exception();
     }
-    int len = strlen(buffer);
+    size_t len = strlen(buffer);
     if (len < MAX_SIZE || buffer[MAX_SIZE-1] == '\0')
         return {buffer};
     else {
