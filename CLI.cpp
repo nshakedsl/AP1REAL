@@ -62,10 +62,7 @@ void CLI::start() {
         } catch (std::exception &exception){
             std::cout << exception.what();
             io->write("invalid input132\n");
-        } catch (std::runtime_error &error){
-            return;
         }
-
     }
 }
 //todo: find if problematic
