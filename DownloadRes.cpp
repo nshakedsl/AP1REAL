@@ -5,12 +5,12 @@ DownloadRes::DownloadRes(Solver *solver, DefaultIO *io) : Command(solver, io) {
 }
 //adds the results, numbered one line after another
 void DownloadRes::execute() {
-    if(solver->beenInitialized()){
-        io->write("please upload data");
+    if(!solver->beenInitialized()){
+        io->write("please upload data\n");
         return;
     }
     if(solver->getResults().empty()){
-        io->write("please classify the data");
+        io->write("please classify the data\n");
         return;
     }
     std::string res;

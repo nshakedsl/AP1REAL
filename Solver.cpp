@@ -3,9 +3,6 @@
 #include <sstream>
 #include <iostream>
 #include "Solver.h"
-std::string trim(const std::string &s){
-    return s.substr(s.find_first_not_of(' '),s.find_last_not_of(' ') - s.find_first_not_of(' '));
-}
 bool validDistance(const std::string& s){
     return s == "AUC" || s == "MAN" || s == "CHB" || s == "CAN" || s == "MIN";
 }

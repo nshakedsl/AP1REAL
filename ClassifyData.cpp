@@ -6,7 +6,7 @@ ClassifyData::ClassifyData(Solver *solver, DefaultIO *io) : Command(solver, io) 
 
 void ClassifyData::execute() {
     if (!solver->beenInitialized()) {
-        io->write("data upload please.\n");
+        io->write("please upload data\n");
         return;
     }
     solver->calculateResults();
