@@ -10,6 +10,6 @@ void ClassifyData::execute() {
         return;
     }
     solver->calculateResults();
-    io->write("complete data classifying\n");
+    io->write("classifying data complete\n");
 }
 
