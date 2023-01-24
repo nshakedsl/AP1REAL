@@ -101,7 +101,7 @@ int main(int argc, char **arg) {
                     std::cout << socketIo.read() << std::endl;
                 } catch (...){
                     socketIo.write("invalid input");
-                    std::cout << "invalid input" << std::endl;
+                    std::cout << "invalid path" << std::endl;
                     break;
                 }
                 std::cin >> input;
@@ -111,7 +111,7 @@ int main(int argc, char **arg) {
                     std::cout << socketIo.read() << std::endl;
                 } catch (...){
                     socketIo.write("invalid input");
-                    std::cout << "invalid input" << std::endl;
+                    std::cout << "invalid path" << std::endl;
                 }
                 break;
             //set KNN for the server
