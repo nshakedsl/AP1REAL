@@ -12,6 +12,7 @@ void setParams::execute() {
     std::cout <<"the input is: "<< str <<"."<< std::endl;
     //if \n is entered the user doesn't want to change the parameters
     if(str.empty()){
+        io->write("OK");
         return;
     }
     try {//try to set the parameters
