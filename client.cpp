@@ -9,7 +9,7 @@
 #include <mutex>
 #include "SocketIO.h"
 #include "FileIO.h"
-#define EMPTY   {2,3}
+#define EMPTY   {2,3,0}
 
 /*
  * attempt to write to the file in the given destination
@@ -121,7 +121,7 @@ int main(int argc, char **arg) {
                 std::cout << socketIo.read();
                 getline(std::cin, input);
                 if(input.empty()){
-                    char empty[2] = EMPTY;
+                    char empty[3] = EMPTY;
                     socketIo.write(empty);
                 }
                 else

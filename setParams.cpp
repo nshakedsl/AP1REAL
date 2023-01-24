@@ -12,7 +12,7 @@ void setParams::execute() {
     std::string str = io->read();
     std::cout << str;
     //if \n is entered the user doesn't want to change the parameters
-    char empty[2] = EMPTY;
+    char empty[3] = EMPTY;
     if(str == empty){
         io->write("OK");
         return;
