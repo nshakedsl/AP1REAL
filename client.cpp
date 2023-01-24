@@ -80,15 +80,16 @@ int main(int argc, char **arg) {
     while (true) {
         std::cout << options;
         getline(std::cin, input);
+        std::cout << "the user input is: " << input <<"." <<std::endl;
         //std::cin >> choice;
         //send choice to the user
-        socketIo.write(input);
         try {
             choice = std::stoi(input);
         } catch (...){
-            std::cout << "invalid input" << std::endl;
+            std::cout << "invalid input user" << std::endl;
             continue;
         }
+        socketIo.write(input);
         switch (choice) {
             //read the given files and write them to the server
             case 1:
@@ -104,7 +105,7 @@ int main(int argc, char **arg) {
                     std::cout << "invalid path" << std::endl;
                     break;
                 }
-                std::cin >> input;
+                getline(std::cin, input);
                 fileIo.setPath(input);
                 try{
                     socketIo.write(fileIo.read());

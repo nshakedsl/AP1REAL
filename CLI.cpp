@@ -45,6 +45,7 @@ void CLI::start() {
     while (choice != 8) {
         //send to the user all the available commands and wait for his choice
         input = io->read();
+        std::cout <<"the user sent: "<< input << '.';
         //check if number
         //call for function that checks if string is number
         choice = -1;
