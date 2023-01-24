@@ -32,7 +32,11 @@ std::string SocketIO::read() {
     } else {
         throw std::invalid_argument("error");
     }
-    char buffer[sizeInput + 1] = {0};
+    //TODO: remeber to free !!!
+    char* buffer = (char*) calloc(sizeInput + 1, sizeof(char));
+    if(buffer==nullptr){
+        throw std::invalid_argument("memory allocation failed");
+    }
     read_bytes = recv(sock, buffer, sizeInput, 0);
     if (read_bytes == 0) {
         throw std::runtime_error("connection closed");
@@ -43,6 +47,7 @@ std::string SocketIO::read() {
         // error
     }
     std::string strRet(buffer);
+    free(buffer);
     return strRet;
 }
 
