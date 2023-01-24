@@ -45,7 +45,6 @@ void CLI::start() {
     while (choice != 8) {
         //send to the user all the available commands and wait for his choice
         input = io->read();
-        std::cout <<"the user sent: "<< input << '.';
         //check if number
         //call for function that checks if string is number
         choice = -1;
@@ -63,6 +62,8 @@ void CLI::start() {
         } catch (std::exception &exception){
             std::cout << exception.what();
             io->write("invalid input132\n");
+        } catch (std::runtime_error &error){
+            return;
         }
 
     }
