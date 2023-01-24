@@ -119,13 +119,11 @@ int main(int argc, char **arg) {
             case 2:
                 //get input from user
                 std::cout << socketIo.read();
-                std::cout <<"arrived";
                 getline(std::cin, input);
                 if(input.empty()){
                     char empty[2] = EMPTY;
                     socketIo.write(empty);
                 }
-                //std::cout <<"sent: "<< input << '.';
                 else
                     socketIo.write(input);
                 input = socketIo.read();
