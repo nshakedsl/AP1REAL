@@ -9,6 +9,7 @@
 #include <mutex>
 #include "SocketIO.h"
 #include "FileIO.h"
+#define EMPTY   {2,3}
 
 /*
  * attempt to write to the file in the given destination
@@ -80,7 +81,6 @@ int main(int argc, char **arg) {
     while (true) {
         std::cout << options;
         getline(std::cin, input);
-        std::cout << "the user input is: " << input <<"." <<std::endl;
         //std::cin >> choice;
         //send choice to the user
         try {
@@ -119,8 +119,15 @@ int main(int argc, char **arg) {
             case 2:
                 //get input from user
                 std::cout << socketIo.read();
+                std::cout <<"arrived";
                 getline(std::cin, input);
-                socketIo.write(input);
+                if(input.empty()){
+                    char empty[2] = EMPTY;
+                    socketIo.write(empty);
+                }
+                //std::cout <<"sent: "<< input << '.';
+                else
+                    socketIo.write(input);
                 input = socketIo.read();
                 if(input != "OK")
                     std::cout << input;
@@ -130,7 +137,7 @@ int main(int argc, char **arg) {
                 std::cout << socketIo.read();
                 break;
             case 5:
-                std::cin >> input;
+                getline(std::cin, input);
                 {
                     std::thread thread(downLoad,input,socketIo);
                     thread.detach();
