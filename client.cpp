@@ -15,14 +15,12 @@
  * attempt to write to the file in the given destination
  * print invalid input if the download failed
  */
-void downLoad(const std::string& path,SocketIO socketIo){
+void downLoad(const std::string& path,const std::string &input){
     std::mutex m;
     FileIO fileIo = FileIO();
     fileIo.setPath(path);
-    std::string input;
     m.lock();
     try {
-        input = socketIo.read();
         if(input != "please classify the data" && input != "please upload data")
             fileIo.write(input);
         else
@@ -77,6 +75,7 @@ int main(int argc, char **arg) {
     std::string input;
     FileIO fileIo = FileIO();
     std::string options = socketIo.read();
+    std::string temp;
     //run until the user puts 8, signifying the end of the connection to the client
     while (true) {
         std::cout << options;
@@ -137,7 +136,8 @@ int main(int argc, char **arg) {
             case 5:
                 getline(std::cin, input);
                 {
-                    std::thread thread(downLoad,input,socketIo);
+                    temp = socketIo.read();
+                    std::thread thread(downLoad,input,temp);
                     thread.detach();
                 }
                 break;
