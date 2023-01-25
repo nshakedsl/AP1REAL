@@ -2,7 +2,7 @@
 #define AP1REAL_SOCKETIO_H
 #include "DefaultIO.h"
 #define SIZE 10
-#define BUFFER_SIZE 4096
+#define BUFFER_SIZE 8188
 #include <cstring>
 class SocketIO : public DefaultIO{
 private:

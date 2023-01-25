@@ -100,7 +100,7 @@ void SocketIO::write(const std::string &x) {
     while (inputLength > BUFFER_SIZE - 1){
         inputLength -= BUFFER_SIZE - 1;
         curentChar += BUFFER_SIZE - 1;
-        writeP(x.substr(curentChar,BUFFER_SIZE-2));
+        writeP(x.substr(curentChar,BUFFER_SIZE-1));
     }
     writeP(x.substr(curentChar));
 }
