@@ -17,9 +17,9 @@ void DownloadRes::execute() {
     std::string res;
     for (int i = 0; i < solver->getResults().size(); ++i) {
         if (!solver->getResults().at(i).empty())
-            res += std::to_string(i) + '\t' + solver->getResults().at(i) + "\n";
+            res += std::to_string(i+1) + '\t' + solver->getResults().at(i) + "\n";
         else
-            res += std::to_string(i) + '\t' + "illegal value" + "\n";
+            res += std::to_string(i+1) + '\t' + "illegal value" + "\n";
     }
     io->write(res);
 }
