@@ -26,7 +26,7 @@ CLI::CLI(DefaultIO *io) {
     Command* command3 = new ClassifyData(solver,io);
     Command* command4 = new DisplayResults(solver,io);
     Command* command5 = new DownloadRes(solver,io);
-    Command* command8 = new Exit(nullptr, nullptr);
+    Command* command8 = new Exit(solver, io);
     Commands.insert({1,command1});
     Commands.insert({2,command2});
     Commands.insert({3,command3});
@@ -51,10 +51,10 @@ void CLI::start() {
         try {
             if (Solver::isNumberValid(input)) {
                 choice = std::stoi(input);
-                if ((choice < 6 && choice > 0) || choice == 8){
+                if (choice < 6 && choice > 0){
                     this->exec(choice);
                 }
-                else
+                else if (choice != 8)
                     io->write("invalid input 2\n");
             }
             else
@@ -67,7 +67,9 @@ void CLI::start() {
 }
 //todo: find if problematic
 CLI::~CLI() {
+    commands.at(8)->execute();
     for (auto const& x : this->commands){
         delete x.second;
     }
+    delete io;
 }
