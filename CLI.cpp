@@ -68,8 +68,8 @@ void CLI::start() {
 //todo: find if problematic
 CLI::~CLI() {
     commands.at(8)->execute();
-    for (auto const& x : this->commands){
-        delete x.second;
+    for (auto x = commands.begin(); x != commands.end(); ++x){
+        delete x->second;
     }
     delete io;
 }

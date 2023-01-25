@@ -6,5 +6,4 @@ Exit::Exit(Solver *solver, DefaultIO *io) : Command(solver, io) {
 
 void Exit::execute() {
     delete solver;
-    //todo: free avaliable recourses
 }
