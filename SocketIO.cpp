@@ -21,7 +21,6 @@ std::string SocketIO::read() {
     } else if (read_bytes < SIZE) {
         throw std::runtime_error("not all data sent");
     }
-    bool flag = false;
     int sizeInput = 0;
     std::string strSize = std::string(bufferSize);
     if (isValidInteger(strSize)) {
