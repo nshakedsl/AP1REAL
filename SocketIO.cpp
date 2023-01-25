@@ -13,9 +13,7 @@ bool isValidInteger(const std::string& str) {
     return !ss.fail() && ss.eof();
 }
 
-
-
-std::string SocketIO::readP() {
+std::string SocketIO::read() {
     char bufferSize[SIZE + 1] = {0}; // for the message
     int read_bytes = recv(sock, bufferSize, SIZE, 0);
     if (read_bytes == 0) {
@@ -52,14 +50,14 @@ std::string SocketIO::readP() {
     return strRet;
 }
 
-void SocketIO::writeP(const std::string &x) {
+void SocketIO::write(const std::string &x) {
     //ADD ZEROS:
     std::string strSent=x;
     int inputLength = strSent.length();
     // declare a stream object
     std::string str1 = std::to_string(inputLength);
     strSent.insert(0, str1); // Inserts str2 in str1 starting from 0 index of str1
-    int addZero = SIZE - std::to_string(inputLength).length();
+    int addZero = SIZE - std::to_string(inputLength).length() ;
     strSent.insert(0, addZero, '0'); // insert 0 addZero times in position 0;
     int sent_bytes = send(sock, strSent.c_str(), strSent.length(), 0);
     if (sent_bytes < 0)
@@ -67,40 +65,4 @@ void SocketIO::writeP(const std::string &x) {
         throw std::runtime_error("error sending to socket");
     }
 
-}
-
-std::string SocketIO::read() {
-    int lenToRead = 0;
-    std::string whatSent;
-    try {
-        lenToRead = std::stoi(readP());
-    } catch (...){
-        throw std::invalid_argument("error with the sockets");
-
-    }
-    while (lenToRead > BUFFER_SIZE-1){
-        lenToRead-=BUFFER_SIZE - 1;
-        whatSent += readP();
-    }
-    whatSent +=readP();
-    return whatSent;
-}
-
-void SocketIO::write(const std::string &x) {
-    int inputLength = x.length();
-    /*std::string lenStr = std::to_string(inputLength);
-    int addZero = SIZE - std::to_string(inputLength).length();
-    lenStr.insert(0, addZero, '0'); // insert 0 addZero times in position 0;
-    int sent_bytes = send(sock, lenStr.c_str(), lenStr.length()+1, 0);
-    if (sent_bytes < 0){
-        throw std::runtime_error("error sending to socket");
-    }*/
-    writeP(std::to_string(x.length()));
-    int curentChar = 0;
-    while (inputLength > BUFFER_SIZE - 1){
-        inputLength -= BUFFER_SIZE - 1;
-        curentChar += BUFFER_SIZE - 1;
-        writeP(x.substr(curentChar,BUFFER_SIZE-1));
-    }
-    writeP(x.substr(curentChar));
 }
