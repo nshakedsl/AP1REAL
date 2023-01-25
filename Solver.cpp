@@ -135,6 +135,8 @@ bool Solver::beenInitialized() {
 }
 //todo: implement results, make sure the order is kept
 void Solver::calculateResults() {
+    std::map<int,std::string> map;
+    results = map;
     for(int i = 0; i <  test.size(); ++i){
         Classification classification = Classification(test.at(i),getMetric(),getK(),train);
         results.insert({i,classification.getClassification()});
