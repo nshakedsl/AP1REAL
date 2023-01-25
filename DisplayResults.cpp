@@ -15,7 +15,10 @@ void DisplayResults::execute() {
         return;
     }
     for (int i = 0; i < solver->getResults().size(); ++i) {
-        res += std::to_string(i) + '\t' + solver->getResults().at(i) + "\n";
+        if(!solver->getResults().at(i).empty())
+            res += std::to_string(i) + '\t' + solver->getResults().at(i) + "\n";
+        else
+            res += std::to_string(i) + '\t' + "illegal value" + "\n";
     }
     res += "Done.\n";
     io->write(res);
