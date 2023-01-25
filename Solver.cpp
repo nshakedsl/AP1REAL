@@ -3,6 +3,14 @@
 #include <sstream>
 #include <iostream>
 #include "Solver.h"
+std::string trim_cr(const std::string& s) {
+    auto start = s.find_first_not_of('\r');
+    if (start == std::string::npos) {
+        return "";
+    }
+    auto end = s.find_last_not_of('\r');
+    return s.substr(start, end - start + 1);
+}
 bool validDistance(const std::string& s){
     return s == "AUC" || s == "MAN" || s == "CHB" || s == "CAN" || s == "MIN";
 }
@@ -66,7 +74,7 @@ void Solver::setTest(const std::string& s) {
 
         // read line field by field
         while (getline(s, field, ',')) {
-            input.push_back(field);
+            input.push_back(trim_cr(field));
         }
         for (int i = 0; i < input.size(); i++) {
             // add field to vector
