@@ -38,6 +38,9 @@ bool validDouble(const std::string &s) {
 }
 
 void Solver::setTrain(const std::string& s) {
+    //reset the train set
+    std::map<std::vector<double>,std::string> tempTrain;
+    train = tempTrain;
     std::istringstream stream(s);
     std::string line;
 
@@ -63,6 +66,9 @@ void Solver::setTrain(const std::string& s) {
 }
 
 void Solver::setTest(const std::string& s) {
+    //reset test
+    std::vector<std::vector<double>> tempTest;
+    test = tempTest;
     std::istringstream stream(s);
     std::string line;
 
